@@ -1,0 +1,338 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+footer {
+  bottom: 0;
+  width: 100%;
+  text-align: center!important;
+}
+
+header {
+  background: #1d415c;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.15);
+  color: white;
+  padding: 0.8em 0;
+  margin-bottom: 2em;
+}
+
+.wrap {
+  margin: 0 5em;
+}
+
+#main-container {
+  padding-bottom: 16em;
+}
+
+#click-container {
+  text-align: center;
+}
+
+#click-button {
+  display: inline-block;
+  width: 150px;
+  aspect-ratio: 1/1;
+  cursor: pointer;
+  background-image: url(../images/chest.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+#click-button[hit='1'] {
+  animation: hit 0.15s 1;
+}
+
+#health-bar {
+  background: rgba(0,0,0,0.3);
+  width: 250px;
+  height: 30px;
+  margin: 0 auto;
+  padding: 2px;
+  border-radius: 5px;
+}
+
+#remaining-health {
+  background: red;
+  height: 100%;
+  border-radius: 5px;
+}
+
+#detail-health {
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  align-items: center;
+}
+
+#stats {
+  width: 100%;
+  padding-top: 1em;
+  text-align: center;
+}
+
+.stat {
+  display: inline-block;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  background-color: #1d415c;
+  width: fit-content;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 2px;
+}
+
+.alt {
+  background-color: #307774!important;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+.backpack-container {
+  background-color: grey;
+  opacity: 0.5;
+  display: inline-block;
+  height: fit-content;
+  place-content: center;
+  color: white;
+  text-align: center;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  margin: 10px;
+}
+
+.backpack-list {
+  display: grid;
+  grid-template: 1fr / 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-auto-flow: row dense;
+  column-gap: 2px;
+  row-gap: 2px;
+  max-width: 100vw;
+  margin: 0 auto;
+}
+
+@media (max-width: 1110px) {
+  .backpack-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+  #main-container {
+    padding-bottom: 14em;
+  }
+}
+
+@media (max-width: 1015px) {
+  .backpack-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+  #main-container {
+    padding-bottom: 14em;
+  }
+}
+
+@media (max-width: 926px) {
+  .backpack-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+  #main-container {
+    padding-bottom: 12em;
+  }
+}
+
+@media (max-width: 837px) {
+  .backpack-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+  #main-container {
+    padding-bottom: 10em;
+  }
+}
+
+@media (max-width: 748px) {
+  .backpack-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+  #main-container {
+    padding-bottom: 8em;
+  }
+}
+
+@media (max-width: 658px) {
+  .backpack-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+  #main-container {
+    padding-bottom: 6em;
+  }
+}
+
+@media (max-width: 569px) {
+  .backpack-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+  #main-container {
+    padding-bottom: 5em;
+  }
+}
+
+@media (max-width: 480px) {
+  .backpack-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  #main-container {
+    padding-bottom: 4em;
+  }
+}
+
+@media (max-width: 409px) {
+  .backpack-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  #main-container {
+    padding-bottom: 3em;
+  }
+}
+
+@media (max-width: 319px) {
+  .backpack-list {
+    grid-template-columns: 1fr 1fr;
+  }
+  #main-container {
+    padding-bottom: 3em;
+  }
+}
+
+.item-box {
+  width: 5.2em;
+  background-color: white;
+  aspect-ratio: 1/1;
+  display: inline-block;
+  margin: 1px;
+  border-radius: 5px;
+}
+
+.equip-container {
+  position: absolute;
+  right: 0;
+  top: 10%;
+  background-color: rgba(0,0,0,0.3);
+  padding: 5px;
+  margin-right: 2em;
+  border-radius: 5px;
+  width: fit-content;
+}
+
+@media (max-width: 377px) {
+  .equip-list {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.equip-list {
+  display: grid;
+  gap: 2px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+.equip-list div {
+  display: inline-block;
+}
+
+#helmet-image {
+  background-image: url(../images/icons/48x48/helmet_01a.png);
+}
+
+#chest-image {
+  background-image: url(../images/icons/48x48/armor_01a.png);
+}
+
+#boots-image {
+  background-image: url(../images/icons/48x48/boots_01a.png);
+}
+
+#weapon-image {
+  background-image: url(../images/icons/48x48/sword_01a.png);
+}
+
+.item-image {
+  background-image: url(../images/icons/48x48/helmet_01a.png);
+  background-repeat: no-repeat;
+  background-size: 90%;
+  background-position: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.item-box {
+  opacity: 0.2;
+  background-repeat: no-repeat;
+  background-size: 90%;
+  background-position: center;
+}
+
+.item-container {
+  position: absolute;
+  left: 5%;
+  width: 5.2em;
+  height: 5.2em;
+}
+
+@media (max-width: 660px) {
+  .equip-container {
+    transform: translateY(50px);
+    position: static;
+    width: fit-content;
+    margin: 0 auto;
+  }
+  .equip-list {
+    display: inline-block;
+  }
+  .item-container {
+    position: absolute!important;
+    left: 0;
+    z-index: 1;
+  }
+  .equip-list div {
+    position: relative;
+  }
+}
+
+
+
+@keyframes hit {
+  25% {
+    transform: rotate(5deg) scale(0.98);
+  }
+  50% {
+    transform: rotate(0deg) scale(0.95);
+  }
+  75% {
+    transform: rotate(-5deg) scale(0.98);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}

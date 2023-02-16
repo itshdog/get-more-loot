@@ -1,0 +1,4 @@
+Clicker game where you kill enemies to get items
+randomly generate items that have rarity, stats, etc. Maybe just start with rarity and +1-5 cps
+Upgrades? Possible but unsure about tab usage.
+Be able to equip the equipment: helmet/hat/head, shirt/chestplate/, pants/leggings/bottoms, boots/shoes

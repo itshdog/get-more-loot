@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './css/App.css';
+import Enemy from './Enemy';
+import Equipment from './Equipment';
+import Backpack from './Backpack';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <div id="title" class="wrap">Get More Loot!</div>
       </header>
+      <div id="main-container">
+        <Enemy/>
+        <Equipment/>
+      </div>
+      <footer>
+        <Backpack />
+      </footer>
     </div>
   );
 }
