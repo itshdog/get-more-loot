@@ -110,8 +110,7 @@ header {
 }
 
 .backpack-container {
-  background-color: grey;
-  opacity: 0.5;
+  background-color: rgba(0,0,0,0.3);
   display: inline-block;
   height: fit-content;
   place-content: center;
@@ -130,6 +129,10 @@ header {
   row-gap: 2px;
   max-width: 100vw;
   margin: 0 auto;
+}
+
+.backpack-list div {
+  position: relative;
 }
 
 @media (max-width: 1110px) {
@@ -257,24 +260,20 @@ header {
   grid-template-rows: 1fr 1fr 1fr 1fr;
 }
 
-.equip-list div {
-  display: inline-block;
-}
-
 #helmet-image {
-  background-image: url(../images/icons/48x48/helmet_01a.png);
+  background-image: url(../images/icons/48x48/helmet_01a_opaque.png);
 }
 
 #chest-image {
-  background-image: url(../images/icons/48x48/armor_01a.png);
+  background-image: url(../images/icons/48x48/armor_01a_opaque.png);
 }
 
 #boots-image {
-  background-image: url(../images/icons/48x48/boots_01a.png);
+  background-image: url(../images/icons/48x48/boots_01a_opaque.png);
 }
 
 #weapon-image {
-  background-image: url(../images/icons/48x48/sword_01a.png);
+  background-image: url(../images/icons/48x48/sword_01a_opaque.png);
 }
 
 .item-image {
@@ -287,17 +286,35 @@ header {
 }
 
 .item-box {
-  opacity: 0.2;
   background-repeat: no-repeat;
   background-size: 90%;
   background-position: center;
 }
 
 .item-container {
-  position: absolute;
-  left: 5%;
+  position: relative;
+  left: 0;
   width: 5.2em;
   height: 5.2em;
+  padding: 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tooltip {
+  z-index:10;
+  padding:14px 20px;
+  width:auto;
+  line-height:16px;
+  display:inline;
+  position:absolute;
+  top:50px;
+  color:#111;
+  border:1px solid #dca;
+  background:#fffAF0;
+  border-radius:4px;
+  box-shadow: 5px 5px 8px #CCC;
+  overflow:auto;
 }
 
 @media (max-width: 660px) {
@@ -309,14 +326,6 @@ header {
   }
   .equip-list {
     display: inline-block;
-  }
-  .item-container {
-    position: absolute!important;
-    left: 0;
-    z-index: 1;
-  }
-  .equip-list div {
-    position: relative;
   }
 }
 

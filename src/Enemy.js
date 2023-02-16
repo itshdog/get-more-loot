@@ -42,6 +42,8 @@ function Enemy() {
         } 
         set_coins(coins + earned);
         window.localStorage.setItem("dataCoins", JSON.stringify(coins));
+
+        generateItem();
     }
 
     /* Generates a random number of coins */
@@ -61,6 +63,9 @@ function Enemy() {
         } else {
             return 0
         }
+    }
+
+    function generateItem() {
     }
 
     return (

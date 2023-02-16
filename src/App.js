@@ -3,6 +3,7 @@ import './css/App.css';
 import Enemy from './Enemy';
 import Equipment from './Equipment';
 import Backpack from './Backpack';
+import Item from './Item';
 
 function App() {
   return (

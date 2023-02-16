@@ -3,10 +3,10 @@ import React from 'react';
 function Item() {
     return (
         <div class='item-container'>
-            <div class='item-image'>
-            </div>
-            <div class='hidden item-content'>
+            <span id='tooltip1' class='tooltip'>
                 Content
+            </span>
+            <div class='tooltip1 item-image'>
             </div>
         </div>
     )
