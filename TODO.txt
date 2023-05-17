@@ -1,0 +1,33 @@
+
+Admin Console
+* Reset player XP, level, attack, defense
+    * To test player xp and attack additions
+* Find way around console log for "you are dead"
+
+Navbar buttons
+* Make them work and open new panels that slide in to replace the current Navbar
+    * Upgrades
+        * Higher chance for loot (20%, increase by 1%)
+        * Automatically start over (Include enable button) (Seems OP but tbd)
+        * Show better loot (Highlight loot with green border) (I like this but needs inventory done first)
+        * Auto sell bad loot
+    * Statistics
+        * Number of killed enemies
+        * Number of times died
+        * Total xp received
+    * Settings
+        * Color themes
+        * Rendering stuff?
+
+Inventory
+* loot
+    * Make loot have a chance to spawn on killing an enemy
+    * common, uncommon, rare, epic, elite, legendary, mythic, exotic, ultimate
+    * Level 1 probably only have common, uncommon, rare. Add more as you progress
+* Equipment
+    * Equip the items to make your character better
+    * Weapon / offland add attack, or shield add defense?
+    * Armor add defense?
+    * Ring add crit chance, crit damage, attack per second, etc.
+        * Unsure how to add variable attack per second
+    * Amulet, accessory same as above. perhaps special abilities? Or more xp, lowered enemy hp

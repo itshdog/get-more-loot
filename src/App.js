@@ -1,23 +1,15 @@
-import React, { useState } from 'react';
-import './css/App.css';
-import Enemy from './Enemy';
-import Equipment from './Equipment';
-import Backpack from './Backpack';
-import Item from './Item';
+import React from 'react';
+import './css/index.css';
+import Navbar from './components/Navbar.js';
+import Content from './components/Content.js';
+import Inventory from './components/Inventory.js';
 
 function App() {
   return (
     <div className="App">
-      <header>
-        <div id="title" class="wrap">Get More Loot!</div>
-      </header>
-      <div id="main-container">
-        <Enemy/>
-        <Equipment/>
-      </div>
-      <footer>
-        <Backpack />
-      </footer>
+        <Navbar />
+        <Content />
+        <Inventory />
     </div>
   );
 }
