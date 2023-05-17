@@ -31,3 +31,6 @@ Inventory
     * Ring add crit chance, crit damage, attack per second, etc.
         * Unsure how to add variable attack per second
     * Amulet, accessory same as above. perhaps special abilities? Or more xp, lowered enemy hp
+
+Footer
+* Add version notes like for my portfolio
