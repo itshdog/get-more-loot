@@ -6,7 +6,7 @@ function Entity({stats, colors, entity}) {
 
     return(
         <div id="Entity">
-            <div className="content-entity">
+            <div className="panel">
                 {entity.name} [Level {stats.level}] 
                 <div className="entity-count">{stats.count}/5 Enemies killed</div>
                 <div className="health-bar">

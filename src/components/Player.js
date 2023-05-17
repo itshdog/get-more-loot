@@ -8,7 +8,7 @@ function Player({stats}) {
 
     return(
         <div id="Player">
-            <div className="content-entity">
+            <div className="panel">
                 Player [Level {stats.level}]
                 <div className="xp-bar">
                     <div className="remaining-xp-bar" style={{width: xp}}></div>

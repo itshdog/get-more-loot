@@ -109,6 +109,15 @@ function Content() {
         setPlayerHP(playerMAXHP);
     }
 
+    /* ADMIN COMMANDS */
+    const fullReset = () => {
+        setPlayerLevel(1);
+        setPlayerXP(0);
+        setPlayerATK(10);
+        setPlayerDEF(5);
+        startOver();
+    }
+
     return(
         <div id="Content">
             <div id='logo'>
@@ -123,9 +132,37 @@ function Content() {
                 colors={{defense: defenseColor}}
             />
             <div id="Restart">
-            <button id="restart-button" onClick={startOver}>
-                Start Over
-            </button>
+                <button id="restart-button" onClick={startOver}>
+                    Start Over
+                </button>
+            <div/>
+            <div id="Admin">
+            <div className="panel" style={{marginTop: '20px'}}>
+                <div className='title' style={{padding: '5px'}}>Admin Panel</div>
+                <div className='admin-buttons'>
+                    <div className='admin-columns'>
+                        <button onClick={fullReset}>Full reset</button>
+                        <button>-----------</button>
+                        <button>-----------</button>
+                    </div>
+                    <div className='admin-columns'>
+                        <button onClick={giveXP}>Give xp</button>
+                        <button>-----------</button>
+                        <button>-----------</button>
+                    </div>
+                    <div className='admin-columns'>
+                        <button>-----------</button>
+                        <button>-----------</button>
+                        <button>-----------</button>
+                    </div>
+                    <div className='admin-columns'>
+                        <button>-----------</button>
+                        <button>-----------</button>
+                        <button>-----------</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
         </div>
     )

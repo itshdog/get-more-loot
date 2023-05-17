@@ -30,46 +30,56 @@ code {
   width: 75%;
 }
 
-#Navbar {
+.back {
+  position: absolute;
+  left: 0;
+  margin: 10px;
+}
+
+.Navbar {
   background: gray;
   float: left;
   width: calc(15% - 16px);
-  height: calc(100% - 16px);
+  height: calc(100vh - 16px);
   margin: 5px;
   border: rgb(92, 92, 92) solid 3px;
   border-radius: 0.5em;
+  position: relative;
 }
 
-#Navbar .navbar-button {
+.Navbar .title {
+  margin-top: 40px;
+  width: 100%;
+}
+
+.Navbar .navbar-button {
   cursor: pointer;
   margin: 3px 0;
   padding: 10px 0;
   background-color:rgba(255, 255, 255, 0.192);
 }
 
-#Navbar .navbar-button:hover {
+.Navbar .navbar-button:hover {
   background-color:rgba(255, 255, 255, 0.397);
 }
 
-#Navbar .navbar-footer {
+.Navbar .navbar-footer {
   font-size: 1em;
   color:rgba(0, 0, 0, 0.377);
-  width: calc(15% - 16px);
   position: absolute;
-  bottom: 20px;
-  left: 8px;
+  bottom: 10px;
+  padding: 5px;
 }
 
-#Navbar .navbar-links a {
+.Navbar .navbar-links a {
   font-size: 0.75em;
   padding: 0 5px;
   font-weight: 700;
 }
 
-#Navbar .selected {
-  background-color:rgba(255, 255, 255, 0.397)!important;
-  cursor: default!important;
-
+.Navbab .Tab {
+  position: absolute;
+  height: calc(100% - 16px);
 }
 
 #Content {
@@ -82,6 +92,23 @@ code {
   font-size: 26px;
   font-weight: 700;
 
+}
+
+.admin-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 15px;
+}
+
+.admin-buttons .admin-columns {
+  width: 100%;
+}
+
+.admin-columns button {
+  font-size: 1em;
+  padding: 5px;
+  margin: 5px;
+  width: calc(100% - 10px);
 }
 
 #Inventory {
@@ -159,6 +186,10 @@ code {
   aspect-ratio: 1 / 1;
 }
 
+#storage-container div:hover {
+  background-color:rgba(255, 255, 255, 0.596);
+}
+
 
 #Player {
   min-height: 50px;
@@ -177,7 +208,7 @@ code {
   font-size: 20px;
 }
 
-.content-entity {
+.panel {
   width: 75%;
   background: gray;
   margin: 0 auto;
