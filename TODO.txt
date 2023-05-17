@@ -1,9 +1,3 @@
-
-Admin Console
-* Reset player XP, level, attack, defense
-    * To test player xp and attack additions
-* Find way around console log for "you are dead"
-
 Navbar buttons
 * Make them work and open new panels that slide in to replace the current Navbar
     * Upgrades
@@ -32,5 +26,16 @@ Inventory
         * Unsure how to add variable attack per second
     * Amulet, accessory same as above. perhaps special abilities? Or more xp, lowered enemy hp
 
-Footer
-* Add version notes like for my portfolio
+XP
+* Add carryover Xp when you level up
+* Add progressive overload with leveling up
+    * Increase by 25% or so per level
+    * Also increase ATK and DEF by 15% or so per level
+    * Make enemies drop more XP at higher levels 10% per level? (lower than xp increase tho)
+
+HP
+* Same as above. Progressive overload. Make enemies have variable health and gradually increase per level. 
+
+Attack, Defense
+* Works for now, but will definitely want more stats for laters. 
+* Gradually increase for each level, likey 15-20% per level.
