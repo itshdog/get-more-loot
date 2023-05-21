@@ -8,24 +8,24 @@ function Navbar() {
     const [settings, setSettings] = useState('none');
 
     const openUpgrade = () => {
-        if (upgrade == 'none') {
+        if (upgrade === 'none') {
             setUpgrade('block');
-        } else if (upgrade == 'block') {
+        } else if (upgrade === 'block') {
             setUpgrade('none');
         }
     }
 
     const openStats = () => {
-        if (stats == 'none') {
+        if (stats === 'none') {
             setStats('block');
-        } else if (stats == 'block') {
+        } else if (stats === 'block') {
             setStats('none');
         }
     }
     const openSettings = () => {
-        if (settings == 'none') {
+        if (settings === 'none') {
             setSettings('block');
-        } else if (settings == 'block') {
+        } else if (settings === 'block') {
             setSettings('none');
         }
     }
@@ -33,6 +33,7 @@ function Navbar() {
     return(
         <div>
         <div className="Navbar">
+            <div className='title'>Navbar</div>
             <div className="navbar-button" style={{marginTop: '20px'}} onClick={openUpgrade}>
                 Upgrades
             </div>

@@ -48,6 +48,7 @@ code {
 }
 
 .Navbar .title {
+  color: white;
   margin-top: 40px;
   width: 100%;
 }
@@ -64,15 +65,16 @@ code {
 }
 
 .Navbar .navbar-footer {
-  font-size: 1em;
+  font-size: 0.75em;
   color:rgba(0, 0, 0, 0.377);
   position: absolute;
   bottom: 10px;
   padding: 5px;
+  width: calc(100% - 10px);
 }
 
 .Navbar .navbar-links a {
-  font-size: 0.75em;
+  font-size: 1em;
   padding: 0 5px;
   font-weight: 700;
 }
@@ -89,6 +91,7 @@ code {
 }
 
 .title {
+  color: white;
   font-size: 26px;
   font-weight: 700;
 
@@ -145,8 +148,12 @@ code {
 
 .equip-column div {
   background-color: rgba(255, 255, 255, 0.459);;
-  margin: 5px 3px;
+  margin: 5px 0;
   border-radius: 0.5em;
+}
+
+.equip-column .armor {
+  height: calc(33% - 5px);
 }
 
 .equip-column .regular {
@@ -154,7 +161,6 @@ code {
 }
 
 .equip-column .ring1, .equip-column .ring2 {
-  aspect-ratio: 1 / 1;
   margin: 0 auto;
 }
 
@@ -179,17 +185,96 @@ code {
   padding: 15px;
 }
 
-#storage-container div {
+#storage-container .item-box .img-container {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5em;
+}
+
+.img-container img {
+  width: 90%;
+  padding-top: 3px;
+}
+
+#storage-container .item-box {
   background-color:rgba(255, 255, 255, 0.459);
   border-radius: 0.5em;
   width: 100%;
   aspect-ratio: 1 / 1;
 }
 
-#storage-container div:hover {
+#storage-container .item-box:hover {
   background-color:rgba(255, 255, 255, 0.596);
 }
 
+.item-box .item {
+  height: 100%;
+  position: relative;
+}
+
+.Common {
+  background-color: none;
+}
+
+.Uncommon {
+  background-color: green;
+}
+
+.Rare {
+  background-color: blue;
+}
+
+.tooltip {
+  z-index: 9999;
+  position: absolute;
+  display: none;
+  background: gray;
+  border: rgb(92, 92, 92) solid 3px;
+  border-radius: 0.5em;
+  padding: 10px;
+  top: -100%;
+  right: 100%;
+  width: 150px;
+  text-align: left;
+}
+
+.item-box:hover .tooltip {
+  display: block;
+}
+
+.tooltip:hover {
+  display: none;
+}
+
+.tooltip-rarity {
+  color: blue!important;
+  font-size: 12px;
+  padding: 3px;
+}
+
+.tooltip .tooltip-title {
+  text-align: center;
+  color: white;
+  font-weight: 700;
+}
+
+.tooltip button {
+  width: calc(50% - 4px);
+  padding: 2px;
+  margin: 2px;
+}
+
+.tooltip-value {
+  margin-top: 10px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.coin {
+  height: 1.5em!important;
+  transform: translateY(4px);
+}
 
 #Player {
   min-height: 50px;
@@ -214,7 +299,20 @@ code {
   margin: 0 auto;
   border-radius: 0.5em;
   padding: 1px;
-  border: rgb(92, 92, 92) solid 3px
+  border: rgb(92, 92, 92) solid 3px;
+  position: relative;
+}
+
+.player-coins {
+  top: -7px;
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+}
+
+.coin-count {
+  height: 1.5em;
+  transform: translateY(6px);
 }
 
 .xp-bar {

@@ -1,4 +1,5 @@
 import React from 'react';
+import Coin from '../images/icons/48x48/coin_01d.png'
 
 function Player({stats}) {
     const percentage = (stats.hp / stats.maxHP) * 100;
@@ -10,6 +11,7 @@ function Player({stats}) {
         <div id="Player">
             <div className="panel">
                 Player [Level {stats.level}]
+                <div className="player-coins">{stats.coins.toLocaleString()}<img className="coin-count" src={Coin} alt="Coins"></img></div>
                 <div className="xp-bar">
                     <div className="remaining-xp-bar" style={{width: xp}}></div>
                 </div>
