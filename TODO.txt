@@ -39,3 +39,9 @@ HP
 Attack, Defense
 * Works for now, but will definitely want more stats for laters. 
 * Gradually increase for each level, likey 15-20% per level.
+
+Enemies
+* Every 5 or 10 levels, add a Boss.
+* Health around 6-8x more than regular enemies.
+* ATK and DEF definitely higher too. 2-3x?
+* Potentially boss specific items, but that's much later into the game development. 
