@@ -204,13 +204,14 @@ code {
   aspect-ratio: 1 / 1;
 }
 
-#storage-container .item-box:hover {
-  background-color:rgba(255, 255, 255, 0.596);
+#storage-container .img-container:hover {
+  background-color:rgba(255, 255, 255, 0.308);
 }
 
 .item-box .item {
   height: 100%;
   position: relative;
+  border-radius: 0.5em;
 }
 
 .Common {
@@ -243,13 +244,21 @@ code {
   display: block;
 }
 
-.tooltip:hover {
-  display: none;
+.tooltip-rarity-Common {
+  color: lightgray!important;
+  font-size: 10px;
+  padding: 3px;
 }
 
-.tooltip-rarity {
-  color: blue!important;
-  font-size: 12px;
+.tooltip-rarity-Uncommon {
+  color: rgb(77, 230, 77)!important;
+  font-size: 10px;
+  padding: 3px;
+}
+
+.tooltip-rarity-Rare {
+  color: rgb(75, 75, 207)!important;
+  font-size: 10px;
   padding: 3px;
 }
 

@@ -19,7 +19,7 @@ function Player({stats}) {
                     <div className="remaining-health-bar" style={{width: hp}}></div>
                     <div className="total-health-bar">{stats.hp}/{stats.maxHP}</div>
                 </div>
-                <div classname="stats">
+                <div className="stats">
                     <div>Attack: {stats.attack}</div>
                     <div>Defense: {stats.defense}</div>
                 </div>

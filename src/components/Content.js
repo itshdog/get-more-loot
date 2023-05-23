@@ -4,7 +4,7 @@ import Item from './Item.js';
 import React, { useState, useEffect } from 'react';
 import logo from '../images/logo.png'
 
-function Content({inventory, setInventory}) {
+function Content({inventory, setInventory, coins, setCoins, sellItem}) {
 
     /* Player Variables */
     const [playerLevel, setPlayerLevel] = useState(1);
@@ -14,7 +14,6 @@ function Content({inventory, setInventory}) {
     const [playerMAXHP, setPlayerMAXHP] = useState(100);
     const [playerXP, setPlayerXP] = useState(0);
     const [playerMAXXP, setPlayerMAXXP] = useState(20);
-    const [coins, setCoins] = useState(0);
     /* Entity Variables */
     const [entityName, setEntityName] = useState('');
     const [entityLevel, setEntityLevel] = useState(1);
@@ -113,14 +112,17 @@ function Content({inventory, setInventory}) {
             }
 
             /* Load loot into inventory array */
+            let id = parseInt(Math.floor(Math.random() * 10000))
+
             const newLoot = [
                 ...inventory,
                 <Item 
-                    info={{name: itemName, rarity: itemRarity, type: itemType}}
+                    sellItem={sellItem}
+                    info={{name: itemName, id: id, rarity: itemRarity, type: itemType}}
                     stats={{base: statBase, type: statType, value: value}}
                 />];
+            console.log("New item: " + itemName + " " + id);
             setInventory(newLoot);
-            /* console.log(...inventory); */
         /* Else, no loot */
         } else {
             return
@@ -204,6 +206,9 @@ function Content({inventory, setInventory}) {
     const killPlayer = () => {
         setPlayerHP(0);
     }
+    const killEnemy = () => {
+        setEntityHP(0);
+    }
     function setCoin(amt) {
         setCoins(amt);
     }
@@ -236,7 +241,7 @@ function Content({inventory, setInventory}) {
                         <button onClick={() => setCoin(0)}>Set 0 coins</button>
                     </div>
                     <div className='admin-columns'>
-                        <button>-----------</button>
+                        <button onClick={giveLoot}>Give Item</button>
                         <button>-----------</button>
                         <button>-----------</button>
                     </div>
@@ -247,7 +252,7 @@ function Content({inventory, setInventory}) {
                     </div>
                     <div className='admin-columns'>
                         <button onClick={killPlayer}>Kill Player</button>
-                        <button>-----------</button>
+                        <button onClick={killEnemy}>Kill entity</button>
                         <button>-----------</button>
                     </div>
                 </div>
