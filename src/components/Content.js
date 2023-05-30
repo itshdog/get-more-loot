@@ -4,17 +4,23 @@ import Item from './Item.js';
 import React, { useState, useEffect } from 'react';
 import logo from '../images/logo.png'
 
-function Content({inventory, setInventory, coins, setCoins, sellItem}) {
+function Content({inventory, setInventory, equipment, setEquipment, coins, setCoins, sellItem, equipItem}) {
 
-    /* Player Variables */
+    /* Attack */
+    const [baseATK, setBaseATK] = useState(10);
+    const [equipATK, setEquipATK] = useState(0);
+    const [playerATK, setPlayerATK] = useState(0);
+    /* Defense */
+    const [baseDEF, setBaseDEF] = useState(5);
+    const [equipDEF, setEquipDEF] = useState(0);
+    const [playerDEF, setPlayerDEF] = useState(0);
+    /* Player */
     const [playerLevel, setPlayerLevel] = useState(1);
-    const [playerATK, setPlayerATK] = useState(10);
-    const [playerDEF, setPlayerDEF] = useState(5);
     const [playerHP, setPlayerHP] = useState(100);
     const [playerMAXHP, setPlayerMAXHP] = useState(100);
     const [playerXP, setPlayerXP] = useState(0);
     const [playerMAXXP, setPlayerMAXXP] = useState(20);
-    /* Entity Variables */
+    /* Entity */
     const [entityName, setEntityName] = useState('');
     const [entityLevel, setEntityLevel] = useState(1);
     const [entityATK, setEntityATK] = useState(6);
@@ -27,13 +33,15 @@ function Content({inventory, setInventory, coins, setCoins, sellItem}) {
     const [defenseColor, setDefenseColor] = useState('');
 
     /* Enemy names */
-    const Enemies = ["Zombie", "Skeleton", "Spider", "Goblin", "Soldier", "Troll", "Cultist"]
+    const Names = ['Banechild', 'Thunderthing', 'Soulmirage', 'Steamsoul', 'Auracreep', 'Vexmutant', 'Terrorbug', 'Metalcrackle', 'Soilspawn', 'Dreamserpent', 'Vilegolem', 'Shadowwoman', 'Webspawn', 'Infernalghoul', 'Bowelmutant', 'Glowsnake', 'Acidscreamer', 'Toxinhound', 'Steamteeth', 'Infernobrood', 'Emberfoot', 'Webstrike', 'Rustvine', 'Barbmask', 'Slagwing', 'Vortexfiend', 'Thunderhand', 'Blazeflayer', 'Boneseeker', 'Spiritstep', 'Bladefigure', 'Thundertree', 'Murksoul', 'Boulderboy', 'Cloudseeker', 'Slagfigure', 'Frostsnake', 'Smokewing', 'Moldhound', 'Bladetaur', 'Gutsoul', 'Fetidhood', 'Smokeboy', 'Frightbrute', 'Banepaw', 'Cursestrike', 'Grieveface', 'Terrorlich', 'Murkbug', 'Fogmirage', 'Vileman', 'Sorrowbug']
+    const Enemies = ['Zombie', 'Skeleton', 'Spider', 'Goblin', 'Soldier', 'Troll', 'Cultist', 'Vampire', 'Witch', 'Wizard', 'Warlock', 'Warrior', 'Human', 'Alien', 'Baby', 'Android', 'Robot', 'Martian', 'Dragonborn', 'Dwarf', 'Elf', 'Gnome', 'Half-elf', 'Centaur', 'Fairy', 'Goliath', 'Orc', 'Minotaur']
+    const Adjectives = ['Common', 'Worst', 'Old', 'Great', 'Greatest', 'Dangerous', 'Mortal', 'Bitter', 'Real', 'Natural', 'Formidable', 'Public', 'Powerful', 'Foreign', 'Last', 'Implacable', 'Deadly', 'Potential', 'Personal', 'Chief', 'Main', 'Ancient', 'Bitterest', 'Inveterate', 'External', 'Open', 'Former', 'Traditional', 'Alien', 'Hereditary', 'Principal', 'Avowed', 'Declared', 'Victorious', 'Terrible', 'Superior', 'Invisible', 'Unseen', 'Cruel', 'Secret', 'Mine', 'Hated', 'Active', 'Internal', 'Arch', 'Fallen', 'Invading', 'Dead', 'Deadliest', 'Vanquished', 'Eternal', 'Unknown', 'Worse', 'Irreconcilable', 'Armed', 'Relentless', 'Hidden', 'Biggest', 'Conquered', 'Insidious', 'Ruthless', 'Fierce', 'Generous', 'Imaginary', 'Brave', 'Savage', 'Outside', 'Ultimate', 'Treacherous', 'Violent', 'Elusive', 'Evil', 'Stronger', 'Communist']
     /* Item names */
     const Items = ["Iron Sword", "Iron Chestplate", "Iron Boots", "Iron Helmet", "Amulet", "Iron Ring", "Iron Shield"]
 
     /* On load, generate random enemy name */
     useEffect(() => {
-        setEntityName(Enemies[(Math.random() * Enemies.length | 0)])
+        setEntityName(Names[Math.random() * Names.length | 0] + " the " + Adjectives[Math.random() * Adjectives.length | 0] + " " + Enemies[(Math.random() * Enemies.length | 0)])
     }, [])
 
     /* In-game ticks */
@@ -46,8 +54,8 @@ function Content({inventory, setInventory, coins, setCoins, sellItem}) {
             /* Entity dies */
             } else if (entityHP <= 0 + playerATK - entityDEF) {
                 giveDrops();
-                spawnEntity();
                 giveLoot();
+                spawnEntity();
             /* Entity alive */
             } else {
                 hitEntity();
@@ -57,6 +65,28 @@ function Content({inventory, setInventory, coins, setCoins, sellItem}) {
         }, 1000);
         return () => { clearInterval(interval); };
     }, [entityHP, entityDEF, entityATK, playerATK, playerDEF, playerXP, playerHP]);
+
+    useEffect(() => {
+        let newEquipATK = 0
+        let newEquipDEF = 0
+        for (let i = 0; i < equipment.length; i++) {
+            if (equipment[i] === undefined) {
+                continue;
+            }
+            if (equipment[i].props.stats.type === "Damage") {
+                newEquipATK += equipment[i].props.stats.base
+            } else if (equipment[i].props.stats.type === "Armor") {
+                newEquipDEF += equipment[i].props.stats.base
+            }
+        }
+        setEquipATK(newEquipATK);
+        setEquipDEF(newEquipDEF);
+    }, [equipment])
+
+    useEffect(() => {
+        setPlayerATK(baseATK + equipATK);
+        setPlayerDEF(baseDEF + equipDEF);
+    }, [baseATK, baseDEF, equipATK, equipDEF])
 
     const giveLoot = () => {
         let dropChance = Math.floor(Math.random() * 100);
@@ -117,7 +147,9 @@ function Content({inventory, setInventory, coins, setCoins, sellItem}) {
             const newLoot = [
                 ...inventory,
                 <Item 
+                    equipItem={equipItem}
                     sellItem={sellItem}
+                    drop={{enemy: entityName}}
                     info={{name: itemName, id: id, rarity: itemRarity, type: itemType}}
                     stats={{base: statBase, type: statType, value: value}}
                 />];
@@ -132,12 +164,13 @@ function Content({inventory, setInventory, coins, setCoins, sellItem}) {
     const spawnEntity = () => {
         /* Set HP and random name */
         setEntityHP(entityMAXHP);
-        setEntityName(Enemies[(Math.random() * Enemies.length | 0)])
+        setEntityName(Names[Math.random() * Names.length | 0] + " the " + Adjectives[Math.random() * Adjectives.length | 0] + " " + Enemies[(Math.random() * Enemies.length | 0)])
         /* Level up after 5 enemies killed*/
         if (entityCOUNT >= 4) {
             setEntityLevel(entityLevel + 1);
-            setEntityDEF(entityDEF + 1);
-            setEntityATK(entityATK + 1);
+            /* Increase entity stats by 2 or 25%, whichever is greater */
+            setEntityDEF(Math.max((entityDEF + 2), Math.round(entityDEF * (1.25))));
+            setEntityATK(Math.max((entityATK + 2), Math.round(entityATK * (1.25))));
             setEntityCOUNT(0);
             /* Notify that player can't do damage */
             if (entityDEF + 5 > playerATK) {
@@ -160,8 +193,8 @@ function Content({inventory, setInventory, coins, setCoins, sellItem}) {
         if (playerXP + xp > playerMAXXP) {
             setPlayerLevel(playerLevel + 1);
             setPlayerXP(0);
-            setPlayerATK(playerATK + 1);
-            setPlayerDEF(playerDEF + 1);
+            setBaseATK(Math.round(baseATK * 1.12));
+            setBaseDEF(Math.round(baseDEF + 1.12));
             console.log('Level up!')
         /* Give xp */
         } else {
@@ -179,7 +212,7 @@ function Content({inventory, setInventory, coins, setCoins, sellItem}) {
     }
 
     const startOver = () => {
-        setEntityName(Enemies[(Math.random() * Enemies.length | 0)])
+        setEntityName(Names[Math.random() * Names.length | 0] + " the " + Adjectives[Math.random() * Adjectives.length | 0] + " " + Enemies[(Math.random() * Enemies.length | 0)])
         setEntityHP(entityMAXHP);
         setEntityLevel(1);
         setEntityCOUNT(0);
@@ -203,6 +236,9 @@ function Content({inventory, setInventory, coins, setCoins, sellItem}) {
     const clearInv = () => {
         setInventory([]);
     }
+    const clearEquip = () => {
+        setEquipment([]);
+    }
     const killPlayer = () => {
         setPlayerHP(0);
     }
@@ -220,6 +256,8 @@ function Content({inventory, setInventory, coins, setCoins, sellItem}) {
             </div>
             <Player 
                 stats={{level: playerLevel, attack: playerATK, defense: playerDEF, hp: playerHP, maxHP: playerMAXHP, xp: playerXP, maxXP: playerMAXXP, coins: coins}}
+                equip={{attack: playerATK - baseATK, defense: playerDEF - baseDEF,}}
+                base={{attack: baseATK, defense: baseDEF}}
             />
             <Entity 
                 entity={{name: entityName}}
@@ -247,7 +285,7 @@ function Content({inventory, setInventory, coins, setCoins, sellItem}) {
                     </div>
                     <div className='admin-columns'>
                         <button onClick={clearInv}>Clear Inventory</button>
-                        <button>-----------</button>
+                        <button onClick={clearEquip}>Clear Equipment</button>
                         <button>-----------</button>
                     </div>
                     <div className='admin-columns'>

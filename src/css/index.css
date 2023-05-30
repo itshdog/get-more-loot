@@ -56,12 +56,28 @@ code {
 .Navbar .navbar-button {
   cursor: pointer;
   margin: 3px 0;
-  padding: 10px 0;
+  padding: 7px 0;
   background-color:rgba(255, 255, 255, 0.192);
+  position: relative;
 }
 
 .Navbar .navbar-button:hover {
   background-color:rgba(255, 255, 255, 0.397);
+}
+
+.upgrade-title {
+  text-align: left;
+  padding-left: 10px;
+}
+
+.upgrade-info .upgrade-cost {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.upgrade-stats {
+  font-size: 12px;
 }
 
 .Navbar .navbar-footer {
@@ -132,40 +148,22 @@ code {
 
 #Equipment {
   height: 50%;
-  margin: 0 30px;
+  margin: 0 35px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  column-gap: 15px;
+  grid-template-rows: repeat(3, 1fr);
+  column-gap: 20px;
+  row-gap: 5px;
 }
 
 #Inventory #Equipment {
   flex: 1 1 auto;
 }
 
-.equip-column {
-  width: 100%;
-}
-
-.equip-column div {
-  background-color: rgba(255, 255, 255, 0.459);;
-  margin: 5px 0;
+.equip-box {
+  background-color: rgba(255, 255, 255, 0.459)!important;
   border-radius: 0.5em;
-}
-
-.equip-column .armor {
-  height: calc(33% - 5px);
-}
-
-.equip-column .regular {
-  height: calc(25% - 5px);
-}
-
-.equip-column .ring1, .equip-column .ring2 {
-  margin: 0 auto;
-}
-
-.equip-column .lg {
-  height: calc(50% - 5px);
+  position: relative;
 }
 
 #Storage {
@@ -193,8 +191,10 @@ code {
 }
 
 .img-container img {
-  width: 90%;
+  max-height: 95%;
   padding-top: 3px;
+  height: 100%;
+  vertical-align: middle;
 }
 
 #storage-container .item-box {
@@ -214,6 +214,32 @@ code {
   border-radius: 0.5em;
 }
 
+.equip-box .item {
+  border-radius: 0.5em;
+  width: 90%;
+  max-width: 70px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  margin-top: 5px;
+}
+
+.equip-box .item .img-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.equip-box .item .img-container img {
+  width: 90%;
+  height: 90%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
 .Common {
   background-color: none;
 }
@@ -226,7 +252,7 @@ code {
   background-color: blue;
 }
 
-.tooltip {
+.item-box .tooltip {
   z-index: 9999;
   position: absolute;
   display: none;
@@ -244,22 +270,41 @@ code {
   display: block;
 }
 
+.equip-box .tooltip {
+  z-index: 9999;
+  position: absolute;
+  display: none;
+  background: gray;
+  border: rgb(92, 92, 92) solid 3px;
+  border-radius: 0.5em;
+  padding: 10px;
+  top: 0%;
+  right: 100%;
+  width: 150px;
+  text-align: left;
+}
+
+.equip-box .tooltip button, .equip-box .tooltip .tooltip-value {
+  display: none;
+}
+
+.equip-box:hover .tooltip {
+  display: block;
+}
+
 .tooltip-rarity-Common {
   color: lightgray!important;
   font-size: 10px;
-  padding: 3px;
 }
 
 .tooltip-rarity-Uncommon {
   color: rgb(77, 230, 77)!important;
   font-size: 10px;
-  padding: 3px;
 }
 
 .tooltip-rarity-Rare {
   color: rgb(75, 75, 207)!important;
   font-size: 10px;
-  padding: 3px;
 }
 
 .tooltip .tooltip-title {
@@ -278,6 +323,11 @@ code {
   margin-top: 10px;
   font-size: 12px;
   text-align: center;
+}
+
+.tooltip-drop {
+  font-size: 9px;
+  color: lightgray;
 }
 
 .coin {

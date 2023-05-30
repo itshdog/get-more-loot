@@ -1,7 +1,7 @@
 import React from 'react';
 import Coin from '../images/icons/48x48/coin_01d.png'
 
-function Player({stats}) {
+function Player({stats, equip, base}) {
     const percentage = (stats.hp / stats.maxHP) * 100;
     const hp = percentage + "%";
     const xpPercent = (stats.xp / stats.maxXP) * 100;
@@ -20,8 +20,8 @@ function Player({stats}) {
                     <div className="total-health-bar">{stats.hp}/{stats.maxHP}</div>
                 </div>
                 <div className="stats">
-                    <div>Attack: {stats.attack}</div>
-                    <div>Defense: {stats.defense}</div>
+                    <div>Total Attack: {stats.attack} | Equipment Attack: {equip.attack} | Base Attack: {base.attack}</div>
+                    <div>Total Defense: {stats.defense} | Equipment Defense: {equip.defense} | Base Defense: {base.defense}</div>
                 </div>
             </div>
         </div>

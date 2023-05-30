@@ -16,6 +16,7 @@ function Entity({stats, colors, entity}) {
                 <div className="stats">
                     <div>Attack: {stats.attack}</div>
                     <div style={{color: colors.defense}}>Defense: {stats.defense}</div>
+                    <div>Drop Chance: 30%</div>
                 </div>
             </div>
         </div>

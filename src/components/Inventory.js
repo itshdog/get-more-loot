@@ -1,6 +1,7 @@
+import LoadEquipment from './LoadEquipment.js';
 import LoadInventory from './LoadInventory.js';
 
-function Inventory({inventory}) {
+function Inventory({equipment, inventory}) {
     
     return(
         <div id="Inventory">
@@ -8,24 +9,12 @@ function Inventory({inventory}) {
                 Equipment
             </div>
             <div id="Equipment">
-                <div className="equip-column">
-                    <div className="regular accessory">Accessory</div>
-                    <div className="regular ring1">Ring</div>
-                    <div className="lg weapon1">Weapon</div>
-                </div>
-                <div className="equip-column">
-                    <div className="armor helmet">Helmet</div>
-                    <div className="armor chestplate">Chestplate</div>
-                    <div className="armor boots">Boots</div>
-                </div>
-                <div className="equip-column">
-                    <div className="regular amulet">Amulet</div>
-                    <div className="regular ring2">Ring</div>
-                    <div className="lg weapon2">Off-hand</div>
-                </div>
+                <LoadEquipment
+                    equipment={equipment}
+                />
             </div>
             <div id="Storage">
-                <div className="title" style={{height: '50px', paddingTop: '20px'}}>Inventory</div>
+                <div className="title" style={{height: '30px'}}>Inventory</div>
                 <div id="storage-container">
                     <LoadInventory
                         inventory={inventory}

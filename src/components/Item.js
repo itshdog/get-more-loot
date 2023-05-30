@@ -7,7 +7,7 @@ function importAll(r) {
   }
 const images = importAll(require.context('../images/icons/48x48', false, /\.(png|jpe?g|svg)$/));
 /* const Items = ["Iron Sword", "Iron Chestplate", "Iron Boots", "Iron Helmet", "Amulet", "Iron Ring", "Iron Shield"] */
-function Item({sellItem, info, stats}) {
+function Item({equipItem, sellItem, drop, info, stats}) {
     let itemImage = '';
     if (info.name === 'Iron Sword') {
         itemImage = images['sword_01b.png']
@@ -30,9 +30,10 @@ function Item({sellItem, info, stats}) {
             <div className='tooltip'>
                 <div className='tooltip-title'>{info.name}</div>
                 <div className={'tooltip-rarity-' + info.rarity}>{info.rarity} {info.type}<div style={{float: 'right'}}>ID: {info.id}</div></div>
+                <div className={'tooltip-drop'}>{drop.enemy}</div>
                 <div className='tooltip-stat'>+{stats.base} {stats.type}</div>
                 <div className='tooltip-value'>Sell Value {stats.value}<img className="coin" src={images['coin_01d.png']} alt="Coins"></img></div>
-                <button>Equip</button><button onClick={() => sellItem(info.id)}>Sell</button>
+                <button onClick={() => equipItem(info.id, info.type)}>Equip</button><button onClick={() => sellItem(info.id)}>Sell</button>
             </div>
         </div>
     )

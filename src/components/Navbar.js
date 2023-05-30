@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NavFooter from './NavFooter.js';
+import Coin from '../images/icons/48x48/coin_01d.png'
 
 function Navbar() {
 
@@ -49,42 +50,44 @@ function Navbar() {
             <button className='back' onClick={openUpgrade}>Back</button>
             <div className='title'>Upgrades</div>
             <div className="navbar-button" style={{marginTop: '20px'}}>
-                Increase loot chance
-                Level 0/10
-                Cost: 10 Coins
+                <div className="upgrade-title">Lucky Day</div>
+                <div className="upgrade-stats">
+                    Increase drop chance by 1%
+                </div>
+                <div className="upgrade-info">
+                    <div className="upgrade-cost">10<img class="coin-count" src={Coin}></img></div>
+                </div>
             </div>
             <div className="navbar-button">
-                Show better loot
-                Level 0/1
-                Cost: 10 Coins
+                <div className="upgrade-title">Item Scanner</div>
+                <div className="upgrade-stats">
+                    Highlight better items
+                </div>
+                <div className="upgrade-info">
+                    <div className="upgrade-cost">1,000<img class="coin-count" src={Coin}></img></div>
+                </div>
             </div>
             <div className="navbar-button">
-                Autosell
-                Level 0/1
-                Cost: 10 coins
+                <div className="upgrade-title">Merchant</div>
+                <div className="upgrade-stats">
+                    Autosells worse items
+                </div>
+                <div className="upgrade-info">
+                    <div className="upgrade-cost">20,000<img class="coin-count" src={Coin}></img></div>
+                </div>
             </div>
             <NavFooter/>
         </div>
         <div className="Navbar Tab" style={{display: stats, position: 'absolute'}}>
             <button className='back' onClick={openStats}>Back</button>
             <div className='title'>Statistics</div>
-            Enemies killed: 100
-            Xp earned: 999
-            Time spent: 1 day 20 minutes
+            Work in progress...
             <NavFooter/>
         </div>
         <div className="Navbar Tab" style={{display: settings, position: 'absolute'}}>
             <button className='back' onClick={openSettings}>Back</button>
             <div className='title'>Settings</div>
-            <div className="navbar-button" style={{marginTop: '20px'}}>
-                Enable dark mode
-            </div>
-            <div className="navbar-button">
-                Enable light mode
-            </div>
-            <div className="navbar-button">
-                Export data
-            </div>
+            Work in progress...
             <NavFooter/>
         </div>
         </div>
