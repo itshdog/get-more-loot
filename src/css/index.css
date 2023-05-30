@@ -30,6 +30,11 @@ code {
   width: 75%;
 }
 
+.invalid {
+  background-color: lightcoral!important;
+  transition: 0.25s;
+}
+
 .back {
   position: absolute;
   left: 0;
@@ -59,6 +64,7 @@ code {
   padding: 7px 0;
   background-color:rgba(255, 255, 255, 0.192);
   position: relative;
+  transition: 0.25s;
 }
 
 .Navbar .navbar-button:hover {

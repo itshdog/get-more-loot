@@ -4,7 +4,7 @@ import Item from './Item.js';
 import React, { useState, useEffect } from 'react';
 import logo from '../images/logo.png'
 
-function Content({inventory, setInventory, equipment, setEquipment, coins, setCoins, sellItem, equipItem}) {
+function Content({inventory, setInventory, equipment, setEquipment, coins, setCoins, dropChance, sellItem, equipItem}) {
 
     /* Attack */
     const [baseATK, setBaseATK] = useState(5);
@@ -60,37 +60,46 @@ function Content({inventory, setInventory, equipment, setEquipment, coins, setCo
             } else {
                 hitEntity();
                 hitPlayer();
-                /* console.log("Hit entity for: " + playerATK + " dmg"); */
             }
         }, 1000);
         return () => { clearInterval(interval); };
     }, [entityHP, entityDEF, entityATK, playerATK, playerDEF, playerXP, playerHP]);
 
+    /* Load equipment attack and defense */
     useEffect(() => {
+        /* Set totals */
         let newEquipATK = 0
         let newEquipDEF = 0
         for (let i = 0; i < equipment.length; i++) {
+            /* If no equipment, continue */
             if (equipment[i] === undefined) {
                 continue;
             }
+            /* Else, increase corresponding stat total */
             if (equipment[i].props.stats.type === "Damage") {
                 newEquipATK += equipment[i].props.stats.base
             } else if (equipment[i].props.stats.type === "Armor") {
                 newEquipDEF += equipment[i].props.stats.base
             }
         }
+        /* Set new equipment stats */
         setEquipATK(newEquipATK);
         setEquipDEF(newEquipDEF);
+    /* Update whenever equipment chances */
     }, [equipment])
 
+    /* Update total/player attack and defense */
     useEffect(() => {
         setPlayerATK(baseATK + equipATK);
         setPlayerDEF(baseDEF + equipDEF);
     }, [baseATK, baseDEF, equipATK, equipDEF])
 
+    /* Chance to drop item */
     const giveLoot = () => {
-        let dropChance = Math.floor(Math.random() * 100);
-        if (dropChance <= 70) {
+        let random = Math.floor(Math.random() * 100);
+        console.log(random);
+        console.log(dropChance);
+        if (random <= (100 - dropChance)) {
             return
         }
         /* Give if available inventory space */
@@ -277,7 +286,7 @@ function Content({inventory, setInventory, equipment, setEquipment, coins, setCo
                 base={{attack: baseATK, defense: baseDEF}}
             />
             <Entity 
-                entity={{name: entityName}}
+                entity={{name: entityName, drop: dropChance}}
                 stats={{level: entityLevel, count: entityCOUNT, attack: entityATK, defense: entityDEF, hp: entityHP, maxHP: entityMAXHP}}
                 colors={{defense: defenseColor}}
             />

@@ -13,6 +13,14 @@ function App() {
     setInventory(inv);
   }, [setInventory])
 
+  /* Drop Chance */
+  const [dropChance, setDropChance] = useState(30);
+  const chanceRef = useRef();
+  const updateChance = useCallback(chance => {
+    chanceRef.current = chance
+    setDropChance(chance)
+  }, [setDropChance])
+
   /* Equipment */
   const [equipment, setEquipment] = useState([])
   const equipRef = useRef();
@@ -117,7 +125,12 @@ function App() {
 
   return (
     <div className="App">
-        <Navbar />
+        <Navbar 
+          coins={coins}
+          setCoins={updateCoins}
+          dropChance={dropChance}
+          updateChance={updateChance}
+        />
         <Content 
           inventory={inventory}
           setInventory={updateInventory}
@@ -125,6 +138,7 @@ function App() {
           setEquipment={updateEquipment}
           coins={coins}
           setCoins={updateCoins}
+          dropChance={dropChance}
           sellItem={sellItem}
           equipItem={equipItem}
         />

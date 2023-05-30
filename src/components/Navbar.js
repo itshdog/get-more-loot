@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavFooter from './NavFooter.js';
 import Coin from '../images/icons/48x48/coin_01d.png'
 
-function Navbar() {
+function Navbar({coins, setCoins, dropChance, updateChance}) {
 
     const [upgrade, setUpgrade] = useState('none');
     const [stats, setStats] = useState('none');
@@ -31,6 +31,54 @@ function Navbar() {
         }
     }
 
+    const [invalid1, setInvalid1] = useState(false);
+    const [invalid2, setInvalid2] = useState(false);
+    const [invalid3, setInvalid3] = useState(false);
+    const [invalid4, setInvalid4] = useState(false);
+    const [luckyDayCost, setLuckyDayCost] = useState(10);
+    const luckyDay = (cost) => {
+        if (coins < cost) {
+            setInvalid1(true);
+            setTimeout(() => {
+                setInvalid1(false);
+            }, 150);
+            return
+        }
+        setCoins(coins - cost);
+        updateChance(dropChance + 1);
+        setLuckyDayCost(luckyDayCost * 2)
+    }
+
+    const placeholderUpgrade2 = (cost) => {
+        if (coins < cost) {
+            setInvalid2(true);
+            setTimeout(() => {
+                setInvalid2(false);
+            }, 150);
+            return
+        }
+    }
+
+    const placeholderUpgrade3 = (cost) => {
+        if (coins < cost) {
+            setInvalid3(true);
+            setTimeout(() => {
+                setInvalid3(false);
+            }, 150);
+            return
+        }
+    }
+
+    const placeholderUpgrade4 = (cost) => {
+        if (coins < cost) {
+            setInvalid4(true);
+            setTimeout(() => {
+                setInvalid4(false);
+            }, 150);
+            return
+        }
+    }
+
     return(
         <div>
         <div className="Navbar">
@@ -49,16 +97,16 @@ function Navbar() {
         <div className="Navbar Tab" style={{display: upgrade, position: 'absolute'}}>
             <button className='back' onClick={openUpgrade}>Back</button>
             <div className='title'>Upgrades</div>
-            <div className="navbar-button" style={{marginTop: '20px'}}>
+            <div className={invalid1 ? 'navbar-button invalid' : 'navbar-button'} onClick={() => luckyDay(luckyDayCost)} style={{marginTop: '20px'}}>
                 <div className="upgrade-title">Lucky Day</div>
                 <div className="upgrade-stats">
                     Increase drop chance by 1%
                 </div>
                 <div className="upgrade-info">
-                    <div className="upgrade-cost">10<img className="coin-count" src={Coin}></img></div>
+                    <div className="upgrade-cost">{luckyDayCost.toLocaleString()}<img className="coin-count" src={Coin}></img></div>
                 </div>
             </div>
-            <div className="navbar-button">
+            <div className={invalid2 ? 'navbar-button invalid' : 'navbar-button'} onClick={() => placeholderUpgrade2(1000)}>
                 <div className="upgrade-title">Respawn point</div>
                 <div className="upgrade-stats">
                     Start over after any completed boss
@@ -67,7 +115,7 @@ function Navbar() {
                     <div className="upgrade-cost">1,000<img className="coin-count" src={Coin}></img></div>
                 </div>
             </div>
-            <div className="navbar-button">
+            <div className={invalid3 ? 'navbar-button invalid' : 'navbar-button'} onClick={() => placeholderUpgrade3(2500)}>
                 <div className="upgrade-title">Item Scanner</div>
                 <div className="upgrade-stats">
                     Highlight better items
@@ -76,7 +124,7 @@ function Navbar() {
                     <div className="upgrade-cost">2,500<img className="coin-count" src={Coin}></img></div>
                 </div>
             </div>
-            <div className="navbar-button">
+            <div className={invalid4 ? 'navbar-button invalid' : 'navbar-button'} onClick={() => placeholderUpgrade4(20000)}>
                 <div className="upgrade-title">Merchant</div>
                 <div className="upgrade-stats">
                     Autosells worse items
