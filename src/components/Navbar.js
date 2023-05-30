@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NavFooter from './NavFooter.js';
 import Coin from '../images/icons/48x48/coin_01d.png'
 
-function Navbar({coins, setCoins, dropChance, updateChance}) {
+function Navbar({RP, setRP, coins, setCoins, dropChance, updateChance}) {
 
     const [upgrade, setUpgrade] = useState('none');
     const [stats, setStats] = useState('none');
@@ -37,26 +37,31 @@ function Navbar({coins, setCoins, dropChance, updateChance}) {
     const [invalid4, setInvalid4] = useState(false);
     const [luckyDayCost, setLuckyDayCost] = useState(10);
     const luckyDay = (cost) => {
-        if (coins < cost) {
+        if (coins < cost || cost > 10000000) {
             setInvalid1(true);
             setTimeout(() => {
                 setInvalid1(false);
             }, 150);
             return
         }
+        if (cost > 10000000) {
+            setLuckyDayCost("MAX");
+        }
         setCoins(coins - cost);
         updateChance(dropChance + 1);
         setLuckyDayCost(luckyDayCost * 2)
     }
 
-    const placeholderUpgrade2 = (cost) => {
-        if (coins < cost) {
+    const buyRP = (cost) => {
+        if (coins < cost || RP === true) {
             setInvalid2(true);
             setTimeout(() => {
                 setInvalid2(false);
             }, 150);
             return
         }
+        setCoins(coins - cost);
+        setRP(true);
     }
 
     const placeholderUpgrade3 = (cost) => {
@@ -106,7 +111,7 @@ function Navbar({coins, setCoins, dropChance, updateChance}) {
                     <div className="upgrade-cost">{luckyDayCost.toLocaleString()}<img className="coin-count" src={Coin}></img></div>
                 </div>
             </div>
-            <div className={invalid2 ? 'navbar-button invalid' : 'navbar-button'} onClick={() => placeholderUpgrade2(1000)}>
+            <div className={invalid2 ? 'navbar-button invalid' : 'navbar-button'} onClick={() => buyRP(1000)}>
                 <div className="upgrade-title">Respawn point</div>
                 <div className="upgrade-stats">
                     Start over after any completed boss

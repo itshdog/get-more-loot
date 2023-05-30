@@ -21,6 +21,14 @@ function App() {
     setDropChance(chance)
   }, [setDropChance])
 
+  /* Respawn Point bool */
+  const [RP, setRP] = useState(false);
+  const RPRef = useRef();
+  const updateRP = useCallback(rp => {
+    RPRef.current = rp
+    setRP(RP)
+  }, [setRP])
+
   /* Equipment */
   const [equipment, setEquipment] = useState([])
   const equipRef = useRef();
@@ -126,6 +134,8 @@ function App() {
   return (
     <div className="App">
         <Navbar 
+          RP={RP}
+          setRP={setRP}
           coins={coins}
           setCoins={updateCoins}
           dropChance={dropChance}
@@ -136,9 +146,12 @@ function App() {
           setInventory={updateInventory}
           equipment={equipment}
           setEquipment={updateEquipment}
+          RP={RP}
+          setRP={setRP}
           coins={coins}
           setCoins={updateCoins}
           dropChance={dropChance}
+          updateChance={updateChance}
           sellItem={sellItem}
           equipItem={equipItem}
         />

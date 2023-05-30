@@ -4,7 +4,7 @@ import Item from './Item.js';
 import React, { useState, useEffect } from 'react';
 import logo from '../images/logo.png'
 
-function Content({inventory, setInventory, equipment, setEquipment, coins, setCoins, dropChance, sellItem, equipItem}) {
+function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, coins, setCoins, dropChance, updateChance, sellItem, equipItem}) {
 
     /* Attack */
     const [baseATK, setBaseATK] = useState(5);
@@ -20,11 +20,13 @@ function Content({inventory, setInventory, equipment, setEquipment, coins, setCo
     const [playerMAXHP, setPlayerMAXHP] = useState(100);
     const [playerXP, setPlayerXP] = useState(0);
     const [playerMAXXP, setPlayerMAXXP] = useState(30);
+    const [maxRestart, setMaxRestart] = useState(1);
+    const [currRestart, setCurrRestart] = useState(1);
     /* Entity */
     const [entityName, setEntityName] = useState('');
     const [entityLevel, setEntityLevel] = useState(1);
-    const [entityATK, setEntityATK] = useState(6);
-    const [entityDEF, setEntityDEF] = useState(1);
+    const [entityATK, setEntityATK] = useState(3);
+    const [entityDEF, setEntityDEF] = useState(2);
     const [entityHP, setEntityHP] = useState(100);
     const [entityMAXHP, setEntityMAXHP] = useState(100);
     const [entityCOUNT, setEntityCOUNT] = useState(0);
@@ -61,7 +63,7 @@ function Content({inventory, setInventory, equipment, setEquipment, coins, setCo
                 hitEntity();
                 hitPlayer();
             }
-        }, 1000);
+        }, 500);
         return () => { clearInterval(interval); };
     }, [entityHP, entityDEF, entityATK, playerATK, playerDEF, playerXP, playerHP]);
 
@@ -94,11 +96,15 @@ function Content({inventory, setInventory, equipment, setEquipment, coins, setCo
         setPlayerDEF(baseDEF + equipDEF);
     }, [baseATK, baseDEF, equipATK, equipDEF])
 
+    useEffect(() => {
+        if ((entityLevel - 1) % 5 == 0 && maxRestart < entityLevel)  {
+            setMaxRestart(entityLevel)
+        }
+    }, [entityLevel])
+
     /* Chance to drop item */
     const giveLoot = () => {
         let random = Math.floor(Math.random() * 100);
-        console.log(random);
-        console.log(dropChance);
         if (random <= (100 - dropChance)) {
             return
         }
@@ -238,23 +244,40 @@ function Content({inventory, setInventory, equipment, setEquipment, coins, setCo
 
     const startOver = () => {
         setEntityName(Names[Math.random() * Names.length | 0] + " the " + Adjectives[Math.random() * Adjectives.length | 0] + " " + Enemies[(Math.random() * Enemies.length | 0)])
-        setEntityMAXHP(100);
-        setEntityHP(100);
-        setEntityLevel(1);
+        setEntityMAXHP(Math.round(100 * Math.pow(1.2, currRestart  - 1)));
+        setEntityHP(Math.round(100 * Math.pow(1.2, currRestart  - 1)));
+        setEntityLevel(currRestart);
         setEntityCOUNT(0);
-        setEntityATK(6);
-        setEntityDEF(1);
+        if (currRestart >= 6) {
+            setEntityATK(Math.round(11 * (Math.pow(1.25, currRestart - 5))));
+            setEntityDEF(Math.round(10 * (Math.pow(1.25, currRestart - 5))));
+        } else {
+            setEntityATK(3);
+            setEntityDEF(2);
+        }
         setDefenseColor('');
 
         setPlayerHP(playerMAXHP);
+    }
+
+    const incRestart = () => {
+        if (currRestart + 5 <= maxRestart) {
+            setCurrRestart(currRestart + 5);
+        }
+    }
+
+    const decRestart = () => {
+        if (currRestart - 5 >= 1) {
+            setCurrRestart(currRestart - 5);
+        }
     }
 
     /* ADMIN COMMANDS */
     const fullReset = () => {
         setPlayerLevel(1);
         setPlayerXP(0);
-        setPlayerATK(10);
-        setPlayerDEF(5);
+        setBaseATK(5);
+        setBaseDEF(5);
         startOver();
         clearInv();
         setCoin(0);
@@ -291,9 +314,20 @@ function Content({inventory, setInventory, equipment, setEquipment, coins, setCo
                 colors={{defense: defenseColor}}
             />
             <div id="Restart">
-                <button id="restart-button" onClick={startOver}>
+                { RP ? 
+                    <div>
+                    <div>Level {currRestart}</div>
+                    <button onClick={decRestart}>Less</button>
+                    <button id="restart-button" onClick={() => startOver(currRestart)}>
+                        Start Over
+                    </button>
+                    <button onClick={incRestart}>More</button>
+                    </div> 
+                    :
+                    <button id="restart-button" onClick={() => startOver(currRestart)}>
                     Start Over
-                </button>
+                    </button>
+            }
             <div/>
             <div id="Admin">
             <div className="panel" style={{marginTop: '20px'}}>
