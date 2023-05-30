@@ -55,7 +55,16 @@ function Navbar() {
                     Increase drop chance by 1%
                 </div>
                 <div className="upgrade-info">
-                    <div className="upgrade-cost">10<img class="coin-count" src={Coin}></img></div>
+                    <div className="upgrade-cost">10<img className="coin-count" src={Coin}></img></div>
+                </div>
+            </div>
+            <div className="navbar-button">
+                <div className="upgrade-title">Respawn point</div>
+                <div className="upgrade-stats">
+                    Start over after any completed boss
+                </div>
+                <div className="upgrade-info">
+                    <div className="upgrade-cost">1,000<img className="coin-count" src={Coin}></img></div>
                 </div>
             </div>
             <div className="navbar-button">
@@ -64,7 +73,7 @@ function Navbar() {
                     Highlight better items
                 </div>
                 <div className="upgrade-info">
-                    <div className="upgrade-cost">1,000<img class="coin-count" src={Coin}></img></div>
+                    <div className="upgrade-cost">2,500<img className="coin-count" src={Coin}></img></div>
                 </div>
             </div>
             <div className="navbar-button">
@@ -73,7 +82,7 @@ function Navbar() {
                     Autosells worse items
                 </div>
                 <div className="upgrade-info">
-                    <div className="upgrade-cost">20,000<img class="coin-count" src={Coin}></img></div>
+                    <div className="upgrade-cost">20,000<img className="coin-count" src={Coin}></img></div>
                 </div>
             </div>
             <NavFooter/>

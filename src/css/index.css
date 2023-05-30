@@ -284,8 +284,12 @@ code {
   text-align: left;
 }
 
-.equip-box .tooltip button, .equip-box .tooltip .tooltip-value {
+.equip-box .tooltip button {
   display: none;
+}
+
+.equip-box .tooltip .tooltip-value {
+  margin-top: 0;
 }
 
 .equip-box:hover .tooltip {
@@ -308,9 +312,15 @@ code {
 }
 
 .tooltip .tooltip-title {
-  text-align: center;
+  text-align: left;
+  font-size: 12px;
   color: white;
   font-weight: 700;
+}
+
+.tooltip-title div {
+  float: right;
+  font-size: 12px;
 }
 
 .tooltip button {
