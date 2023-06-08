@@ -11,20 +11,32 @@ function Item({equipItem, sellItem, drop, info, stats}) {
     let itemImage = '';
     if (info.name === 'Iron Sword') {
         itemImage = images['sword_01b.png']
+    } else if (info.name === 'Gold Sword') {
+        itemImage = images['sword_01d.png']
     } else if (info.name === 'Iron Chestplate') {
         itemImage = images['armor_01b.png']
     } else if (info.name === 'Iron Boots') {
         itemImage = images['boots_01b.png']
     } else if (info.name === 'Iron Helmet') {
         itemImage = images['helmet_01b.png']
-    }  else if (info.name === 'Amulet') {
+    } else if (info.name === 'Wizard Hat') {
+        itemImage = images['hat_01a.png']
+    } else if (info.name === 'Amulet') {
         itemImage = images['necklace_02b.png']
-    }  else if (info.name === 'Iron Ring') {
+    } else if (info.name === 'Protection Amulet') {
+        itemImage = images['necklace_02d.png']
+    } else if (info.name === 'Iron Ring') {
         itemImage = images['ring_01b.png']
-    }  else if (info.name === 'Iron Shield') {
+    } else if (info.name === 'Gold Ring') {
+        itemImage = images['ring_01d.png']
+    } else if (info.name === 'Iron Shield') {
         itemImage = images['shield_01b.png']
+    } else if (info.name === 'Iron Tower Shield') {
+        itemImage = images['shield_02b.png']
     } else if (info.name === 'Iron Gloves') {
         itemImage = images['gloves_01b.png']
+    } else if (info.name === 'Armor Tome') {
+        itemImage = images['book_05a.png']
     } else if (info.name === 'Damage Tome') {
         itemImage = images['book_06d.png']
     }

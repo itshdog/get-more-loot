@@ -1,3 +1,4 @@
+import React from 'react';
 import LoadEquipment from './LoadEquipment.js';
 import LoadInventory from './LoadInventory.js';
 

@@ -12,12 +12,14 @@ function Player({stats, equip, base}) {
             <div className="panel">
                 Player [Level {stats.level}]
                 <div className="player-coins">{stats.coins.toLocaleString()}<img className="coin-count" src={Coin} alt="Coins"></img></div>
-                <div className="xp-bar">
-                    <div className="remaining-xp-bar" style={{width: xp}}></div>
-                </div>
-                <div className="health-bar">
-                    <div className="remaining-health-bar" style={{width: hp}}></div>
-                    <div className="total-health-bar">{stats.hp}/{stats.maxHP}</div>
+                <div className="health-xp">
+                    <div className="xp-bar">
+                        <div className="remaining-xp-bar" style={{width: xp}}></div>
+                    </div>
+                    <div className="health-bar">
+                        <div className="remaining-health-bar" style={{width: hp}}></div>
+                        <div className="total-health-bar">{stats.hp}/{stats.maxHP}</div>
+                    </div>
                 </div>
                 <div className="stats">
                     <div>Total Attack: {stats.attack} | Equipment Attack: {equip.attack} | Base Attack: {base.attack}</div>

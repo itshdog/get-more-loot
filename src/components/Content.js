@@ -39,7 +39,7 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
     const Enemies = ['Zombie', 'Skeleton', 'Spider', 'Goblin', 'Soldier', 'Troll', 'Cultist', 'Vampire', 'Witch', 'Wizard', 'Warlock', 'Warrior', 'Human', 'Alien', 'Baby', 'Android', 'Robot', 'Martian', 'Dragonborn', 'Dwarf', 'Elf', 'Gnome', 'Half-elf', 'Centaur', 'Fairy', 'Goliath', 'Orc', 'Minotaur']
     const Adjectives = ['Common', 'Worst', 'Old', 'Great', 'Greatest', 'Dangerous', 'Mortal', 'Bitter', 'Real', 'Natural', 'Formidable', 'Public', 'Powerful', 'Foreign', 'Last', 'Implacable', 'Deadly', 'Potential', 'Personal', 'Chief', 'Main', 'Ancient', 'Bitterest', 'Inveterate', 'External', 'Open', 'Former', 'Traditional', 'Alien', 'Hereditary', 'Principal', 'Avowed', 'Declared', 'Victorious', 'Terrible', 'Superior', 'Invisible', 'Unseen', 'Cruel', 'Secret', 'Mine', 'Hated', 'Active', 'Internal', 'Arch', 'Fallen', 'Invading', 'Dead', 'Deadliest', 'Vanquished', 'Eternal', 'Unknown', 'Worse', 'Irreconcilable', 'Armed', 'Relentless', 'Hidden', 'Biggest', 'Conquered', 'Insidious', 'Ruthless', 'Fierce', 'Generous', 'Imaginary', 'Brave', 'Savage', 'Outside', 'Ultimate', 'Treacherous', 'Violent', 'Elusive', 'Evil', 'Stronger', 'Communist']
     /* Item names */
-    const Items = ["Iron Sword", "Iron Chestplate", "Iron Boots", "Iron Helmet", "Amulet", "Iron Ring", "Iron Shield", "Iron Gloves", "Damage Tome"]
+    const Items = ["Iron Sword", "Iron Chestplate", "Iron Boots", "Iron Helmet", "Amulet", "Iron Ring", "Iron Shield", "Iron Gloves", "Damage Tome", "Gold Sword", "Wizard Hat", "Protection Amulet", "Gold Ring", "Iron Tower Shield", "Armor Tome"]
 
     /* On load, generate random enemy name */
     useEffect(() => {
@@ -54,7 +54,7 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
                 setPlayerHP(0);
                 return
             /* Entity dies */
-            } else if (entityHP <= 0 + playerATK - entityDEF) {
+            } else if (entityHP <= 0 + playerATK) {
                 giveDrops();
                 giveLoot();
                 spawnEntity();
@@ -96,8 +96,9 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
         setPlayerDEF(baseDEF + equipDEF);
     }, [baseATK, baseDEF, equipATK, equipDEF])
 
+    /* Level up maxRestart at level 6, level 11, level 16, etc */
     useEffect(() => {
-        if ((entityLevel - 1) % 5 == 0 && maxRestart < entityLevel)  {
+        if ((entityLevel - 1) % 5 === 0 && maxRestart < entityLevel)  {
             setMaxRestart(entityLevel)
         }
     }, [entityLevel])
@@ -136,6 +137,9 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
             if (itemName === "Iron Sword") {
                 statType = "Damage"
                 itemType = "sword"
+            } else if (itemName === "Gold Sword") {
+                statType = "Damage"
+                itemType = "sword"
             } else if (itemName === "Iron Chestplate") {
                 statType = "Armor"
                 itemType = "chestplate"
@@ -145,13 +149,25 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
             } else if (itemName === "Iron Helmet") {
                 statType = "Armor"
                 itemType = "helmet"
+            } else if (itemName === "Wizard Hat") {
+                statType = "Damage"
+                itemType = "helmet"
             } else if (itemName === "Amulet") {
                 statType = "Damage"
+                itemType = "amulet"
+            } else if (itemName === "Protection Amulet") {
+                statType = "Armor"
                 itemType = "amulet"
             } else if (itemName === "Iron Ring") {
                 statType = "Damage"
                 itemType = "ring"
+            } else if (itemName === "Gold Ring") {
+                statType = "Armor"
+                itemType = "ring"
             } else if (itemName === "Iron Shield") {
+                statType = "Armor"
+                itemType = "off-hand"
+            } else if (itemName === "Iron Tower Shield") {
                 statType = "Armor"
                 itemType = "off-hand"
             } else if (itemName === "Iron Gloves") {
@@ -159,6 +175,9 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
                 itemType = "gloves"
             } else if (itemName === "Damage Tome") {
                 statType = "Damage"
+                itemType = "accessory"
+            } else if (itemName === "Armor Tome") {
+                statType = "Armor"
                 itemType = "accessory"
             }
 
@@ -184,26 +203,50 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
 
     const spawnEntity = () => {
         /* Set HP and random name */
-        setEntityHP(entityMAXHP);
         setEntityName(Names[Math.random() * Names.length | 0] + " the " + Adjectives[Math.random() * Adjectives.length | 0] + " " + Enemies[(Math.random() * Enemies.length | 0)])
         /* Level up after 5 enemies killed*/
         if (entityCOUNT >= 4) {
-            setEntityLevel(entityLevel + 1);
-            let newHP = Math.round(entityMAXHP * 1.2)
-            setEntityMAXHP(newHP);
-            setEntityHP(newHP);
-            /* Increase entity stats by 2 or 25%, whichever is greater */
-            setEntityDEF(Math.max((entityDEF + 2), Math.round(entityDEF * (1.25))));
-            setEntityATK(Math.max((entityATK + 2), Math.round(entityATK * (1.25))));
-            setEntityCOUNT(0);
-            /* Notify that player can't do damage */
-            if (entityDEF > playerATK) {
-                setDefenseColor('red');
+            /* SPAWN BOSS */
+            let bossHP = Math.round(entityMAXHP * 4);
+            let bossATK = Math.round(entityATK * 2);
+            let bossDEF = Math.round(entityDEF * 2);
+            if (entityLevel%5 === 4) {
+                setEntityName("BOSS: " + entityName);
+                setEntityMAXHP(bossHP);
+                setEntityHP(bossHP);
+                setEntityATK(bossATK);
+                setEntityDEF(bossDEF);
+                setEntityCOUNT(5);
+
+            /* SPAWN REGULAR ENEMY */
             } else {
-                setDefenseColor('');
+                console.log("ENTITY LEVEL: " + entityLevel)
+                if (entityLevel%5 === 0) { 
+                    console.log("Restore from boss");
+                    let HP = Math.round((bossHP / 4) * 1.2)
+                    let ATK = Math.round(Math.round((bossATK / 2) * 1.25))
+                    let DEF = Math.round(Math.round((bossDEF / 2) * 1.25))
+                    setEntityMAXHP(Math.ceil(HP/4));
+                    setEntityHP(Math.ceil(HP/4));
+                    setEntityDEF(Math.ceil(DEF/2));
+                    setEntityATK(Math.ceil(ATK/2));
+                    setEntityCOUNT(0);
+                } else {
+                    console.log("Spawn regular enemy");
+                    let HP = Math.round(entityMAXHP * 1.2)
+                    let ATK = Math.max((entityATK + 2), Math.round(entityATK * (1.25)))
+                    let DEF = Math.max((entityDEF + 2), Math.round(entityDEF * (1.25)))
+                    setEntityMAXHP(HP);
+                    setEntityHP(HP);
+                    setEntityDEF(DEF);
+                    setEntityATK(ATK);
+                    setEntityCOUNT(0);
+                }
             }
+            setEntityLevel(entityLevel + 1);
         /* Count up if 1-4 enemies killed*/
         } else {
+            setEntityHP(entityMAXHP);
             setEntityCOUNT(entityCOUNT + 1);
         }
     }

@@ -404,12 +404,16 @@ code {
 .health-bar, .xp-bar {
   width: calc(100% - 60px);
   height: 20px;
-  margin: 10px 30px 10px 30px;
+  margin: 1px 30px 1px 30px;
   padding: 2px;
   top: 0;
   color: white;
   background:rgba(255, 255, 255, 0.144);
   border-radius: 0.5em;
+}
+
+.health-xp {
+  margin: 5px 0;
 }
 
 .health-bar .remaining-health-bar {
