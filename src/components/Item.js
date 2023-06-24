@@ -7,7 +7,7 @@ function importAll(r) {
   }
 const images = importAll(require.context('../images/icons/48x48', false, /\.(png|jpe?g|svg)$/));
 /* const Items = ["Iron Sword", "Iron Chestplate", "Iron Boots", "Iron Helmet", "Amulet", "Iron Ring", "Iron Shield"] */
-function Item({equipItem, sellItem, drop, info, stats}) {
+function Item({equipItem, sellItem, drop, info, stats, affixes}) {
     let itemImage = '';
     if (info.name === 'Iron Sword') {
         itemImage = images['sword_01b.png']
@@ -40,19 +40,56 @@ function Item({equipItem, sellItem, drop, info, stats}) {
     } else if (info.name === 'Damage Tome') {
         itemImage = images['book_06d.png']
     }
-    return(
+
+    /* <div className='tooltip-stat-small'>+{affixes[1][2]}% {affixes[1][1]}</div> */
+    if (affixes.length === 0) {
+        return(
+            <div className={'item ' + info.rarity}>
+                <div className='img-container'><img src={itemImage} alt={info.name}></img></div>
+                <div className='tooltip'>
+                    <div className='tooltip-title'>{info.name}<div>Level {drop.level}</div></div>
+                    <div className={'tooltip-rarity-' + info.rarity}>{info.rarity} {info.type}<div style={{float: 'right'}}>ID: {info.id}</div></div>
+                    <div className={'tooltip-drop'}>{drop.enemy}</div>
+                    <div className='tooltip-stat'>{stats.base} {stats.type}</div>
+                    <div className='tooltip-value'>Sell Value {stats.value}<img className="coin" src={images['coin_01d.png']} alt="Coins"></img></div>
+                    <button onClick={() => equipItem(info.id, info.type)}>Equip</button><button onClick={() => sellItem(info.id)}>Sell</button>
+                </div>
+            </div>
+        )
+    } else if (affixes.length === 1) {
+        console.log(affixes)
+        return(
         <div className={'item ' + info.rarity}>
             <div className='img-container'><img src={itemImage} alt={info.name}></img></div>
             <div className='tooltip'>
                 <div className='tooltip-title'>{info.name}<div>Level {drop.level}</div></div>
                 <div className={'tooltip-rarity-' + info.rarity}>{info.rarity} {info.type}<div style={{float: 'right'}}>ID: {info.id}</div></div>
                 <div className={'tooltip-drop'}>{drop.enemy}</div>
-                <div className='tooltip-stat'>+{stats.base} {stats.type}</div>
+                <div className='tooltip-stat'>{stats.base} {stats.type}</div>
+                <div className='tooltip-stat-small'>+{affixes[0][1]}% {affixes[0][0]}</div>
                 <div className='tooltip-value'>Sell Value {stats.value}<img className="coin" src={images['coin_01d.png']} alt="Coins"></img></div>
                 <button onClick={() => equipItem(info.id, info.type)}>Equip</button><button onClick={() => sellItem(info.id)}>Sell</button>
             </div>
         </div>
-    )
+        )
+    } else if (affixes.length === 2) {
+        console.log(affixes)
+        return(
+        <div className={'item ' + info.rarity}>
+            <div className='img-container'><img src={itemImage} alt={info.name}></img></div>
+            <div className='tooltip'>
+                <div className='tooltip-title'>{info.name}<div>Level {drop.level}</div></div>
+                <div className={'tooltip-rarity-' + info.rarity}>{info.rarity} {info.type}<div style={{float: 'right'}}>ID: {info.id}</div></div>
+                <div className={'tooltip-drop'}>{drop.enemy}</div>
+                <div className='tooltip-stat'>{stats.base} {stats.type}</div>
+                <div className='tooltip-stat-small'>+{affixes[0][1]}% {affixes[0][0]}</div>
+                <div className='tooltip-stat-small'>+{affixes[1][1]}% {affixes[1][0]}</div>
+                <div className='tooltip-value'>Sell Value {stats.value}<img className="coin" src={images['coin_01d.png']} alt="Coins"></img></div>
+                <button onClick={() => equipItem(info.id, info.type)}>Equip</button><button onClick={() => sellItem(info.id)}>Sell</button>
+            </div>
+        </div>
+        )
+    }
 }
 
 export default Item;

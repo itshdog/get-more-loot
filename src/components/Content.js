@@ -14,6 +14,14 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
     const [baseDEF, setBaseDEF] = useState(5);
     const [equipDEF, setEquipDEF] = useState(0);
     const [playerDEF, setPlayerDEF] = useState(0);
+    /* Critical Hit Damage */
+    const [baseCritDamage, setBaseCritDamage] = useState(1);
+    const [equipCritDamage, setEquipCritDamage] = useState(0);
+    const [playerCritDamage, setPlayerCritDamage] = useState(0);
+    /* Critical Strike Chance */
+    const [baseCritChance, setBaseCritChance] = useState(50);
+    const [equipCritChance, setEquipCritChance] = useState(0);
+    const [playerCritChance, setPlayerCritChance] = useState(0);
     /* Player */
     const [playerLevel, setPlayerLevel] = useState(1);
     const [playerHP, setPlayerHP] = useState(100);
@@ -27,8 +35,8 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
     const [entityLevel, setEntityLevel] = useState(1);
     const [entityATK, setEntityATK] = useState(3);
     const [entityDEF, setEntityDEF] = useState(2);
-    const [entityHP, setEntityHP] = useState(100);
-    const [entityMAXHP, setEntityMAXHP] = useState(100);
+    const [entityHP, setEntityHP] = useState(30);
+    const [entityMAXHP, setEntityMAXHP] = useState(30);
     const [entityCOUNT, setEntityCOUNT] = useState(0);
 
     /* Item Variables */
@@ -117,6 +125,8 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
             let statBase = 2
             let statType = ""
             let value = 0
+            let modifiers = 0
+            let affixes = []
 
             let itemName = Items[(Math.random() * Items.length | 0)]
             let chances = Math.floor(Math.random() * 100)
@@ -125,10 +135,12 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
                 itemRarity = "Rare"
                 statBase = statBase + 2
                 value = 25
+                modifiers = 2
             } else if (chances < 95 && chances > 70) {
                 itemRarity = "Uncommon"
                 statBase = statBase + 1
                 value = 15
+                modifiers = 1
             } else {
                 itemRarity = "Common"
                 value = 10
@@ -184,6 +196,14 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
             /* Load loot into inventory array */
             let id = parseInt(Math.floor(Math.random() * 10000))
 
+            const listModifiers = [['Critical Hit Chance', 2], ['Critical Hit Damage', 5]]
+            if (modifiers === 1) {
+                affixes = [listModifiers[Math.floor(Math.random() * listModifiers.length)]]
+
+            } else if (modifiers === 2) {
+                affixes = listModifiers
+            }
+
             const newLoot = [
                 ...inventory,
                 <Item 
@@ -192,6 +212,7 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
                     drop={{enemy: entityName, level: entityLevel}}
                     info={{name: itemName, id: id, rarity: itemRarity, type: itemType}}
                     stats={{base: (Math.round(statBase * Math.pow(1.2, entityLevel - 1))), type: statType, value: (Math.round(value * Math.pow(1.2, entityLevel - 1)))}}
+                    affixes={affixes}
                 />];
             console.log("New item: " + itemName + " " + id);
             setInventory(newLoot);
@@ -352,6 +373,7 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
                 base={{attack: baseATK, defense: baseDEF}}
             />
             <Entity 
+                setEntityHP={{setEntityHP}}
                 entity={{name: entityName, drop: dropChance}}
                 stats={{level: entityLevel, count: entityCOUNT, attack: entityATK, defense: entityDEF, hp: entityHP, maxHP: entityMAXHP}}
                 colors={{defense: defenseColor}}
@@ -372,7 +394,7 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
                     </button>
             }
             <div/>
-            <div id="Admin">
+            <div id="Admin" className="hidden">
             <div className="panel" style={{marginTop: '20px'}}>
                 <div className='title' style={{padding: '5px'}}>Admin Panel</div>
                 <div className='admin-buttons'>

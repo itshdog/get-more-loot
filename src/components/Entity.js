@@ -1,13 +1,13 @@
 import React from 'react';
 
-function Entity({stats, colors, entity}) {
+function Entity({setEntityHP, stats, colors, entity}) {
     const percentage = (stats.hp / stats.maxHP) * 100;
     const hp = percentage + "%";
 
     return(
         <div id="Entity">
             <div className="panel">
-                {entity.name} [Level {stats.level}] 
+                {entity.name} [Level {stats.level}]
                 <div className="entity-count">{stats.count}/5 Enemies killed</div>
                 <div className="health-bar">
                     <div className="remaining-health-bar" style={{width: hp}}></div>

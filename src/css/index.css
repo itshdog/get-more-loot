@@ -298,6 +298,10 @@ code {
   margin-top: 0;
 }
 
+.tooltip-stat-small {
+  font-size: 10px;
+}
+
 .equip-box:hover .tooltip {
   display: block;
 }
@@ -426,4 +430,8 @@ code {
 .health-bar .total-health-bar {
   position: relative;
   top: -22px;
+}
+
+.hidden {
+  display: none;
 }
