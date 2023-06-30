@@ -29,6 +29,14 @@ function App() {
     setRP(RP)
   }, [setRP])
 
+  /* Item Scan Bool */
+  const [itemScan, setItemScan] = useState(false);
+  const itemScanRef = useRef();
+  const updateItemScan = useCallback(itemScan => {
+    itemScanRef.current = itemScan
+    setItemScan(itemScan)
+  }, [setItemScan])
+
   /* Equipment */
   const [equipment, setEquipment] = useState([])
   const equipRef = useRef();
@@ -136,6 +144,8 @@ function App() {
         <Navbar 
           RP={RP}
           setRP={setRP}
+          itemScan={itemScan}
+          setItemScan={setItemScan}
           coins={coins}
           setCoins={updateCoins}
           dropChance={dropChance}
@@ -156,6 +166,9 @@ function App() {
           equipItem={equipItem}
         />
         <Inventory 
+          itemScan={itemScan}
+          setItemScan={setItemScan}
+          equipRef={equipRef}
           equipment={equipment}
           setEquipment={updateEquipment}
           inventory={inventory} 
