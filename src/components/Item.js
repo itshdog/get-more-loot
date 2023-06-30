@@ -57,7 +57,6 @@ function Item({equipItem, sellItem, drop, info, stats, affixes}) {
             </div>
         )
     } else if (affixes.length === 1) {
-        console.log(affixes)
         return(
         <div className={'item ' + info.rarity}>
             <div className='img-container'><img src={itemImage} alt={info.name}></img></div>
@@ -73,7 +72,6 @@ function Item({equipItem, sellItem, drop, info, stats, affixes}) {
         </div>
         )
     } else if (affixes.length === 2) {
-        console.log(affixes)
         return(
         <div className={'item ' + info.rarity}>
             <div className='img-container'><img src={itemImage} alt={info.name}></img></div>

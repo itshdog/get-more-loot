@@ -308,8 +308,8 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
 
     const startOver = () => {
         setEntityName(Names[Math.random() * Names.length | 0] + " the " + Adjectives[Math.random() * Adjectives.length | 0] + " " + Enemies[(Math.random() * Enemies.length | 0)])
-        setEntityMAXHP(Math.round(100 * Math.pow(1.2, currRestart  - 1)));
-        setEntityHP(Math.round(100 * Math.pow(1.2, currRestart  - 1)));
+        setEntityMAXHP(Math.round(30 * Math.pow(1.2, currRestart  - 1)));
+        setEntityHP(Math.round(30 * Math.pow(1.2, currRestart  - 1)));
         setEntityLevel(currRestart);
         setEntityCOUNT(0);
         if (currRestart >= 6) {

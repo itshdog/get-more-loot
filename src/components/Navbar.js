@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NavFooter from './NavFooter.js';
 import Coin from '../images/icons/48x48/coin_01d.png'
 
-function Navbar({RP, setRP, coins, setCoins, dropChance, updateChance}) {
+function Navbar({RP, setRP, itemScan, setItemScan, coins, setCoins, dropChance, updateChance}) {
 
     const [upgrade, setUpgrade] = useState('none');
     const [stats, setStats] = useState('none');
@@ -64,14 +64,16 @@ function Navbar({RP, setRP, coins, setCoins, dropChance, updateChance}) {
         setRP(true);
     }
 
-    const placeholderUpgrade3 = (cost) => {
-        if (coins < cost) {
+    const buyItemScan = (cost) => {
+        if (coins < cost || itemScan === true) {
             setInvalid3(true);
             setTimeout(() => {
                 setInvalid3(false);
             }, 150);
             return
         }
+        setCoins(coins - cost);
+        setItemScan(true);
     }
 
     const placeholderUpgrade4 = (cost) => {
@@ -111,6 +113,17 @@ function Navbar({RP, setRP, coins, setCoins, dropChance, updateChance}) {
                     <div className="upgrade-cost">{luckyDayCost.toLocaleString()}<img className="coin-count" src={Coin}></img></div>
                 </div>
             </div>
+            { RP ?
+            <div className={'navbar-button purchased'}>
+                <div className="upgrade-title">Respawn point</div>
+                <div className="upgrade-stats">
+                    Start over after any completed boss
+                </div>
+                <div className="upgrade-info">
+                    <div className="upgrade-cost">--<img className="coin-count" src={Coin}></img></div>
+                </div>
+            </div>
+            :
             <div className={invalid2 ? 'navbar-button invalid' : 'navbar-button'} onClick={() => buyRP(1000)}>
                 <div className="upgrade-title">Respawn point</div>
                 <div className="upgrade-stats">
@@ -120,7 +133,19 @@ function Navbar({RP, setRP, coins, setCoins, dropChance, updateChance}) {
                     <div className="upgrade-cost">1,000<img className="coin-count" src={Coin}></img></div>
                 </div>
             </div>
-            <div className={invalid3 ? 'navbar-button invalid' : 'navbar-button'} onClick={() => placeholderUpgrade3(2500)}>
+            }
+            {itemScan ?
+            <div className={'navbar-button purchased'}>
+                <div className="upgrade-title">Item Scanner</div>
+                <div className="upgrade-stats">
+                    Highlight better items
+                </div>
+                <div className="upgrade-info">
+                    <div className="upgrade-cost">--<img className="coin-count" src={Coin}></img></div>
+                </div>
+            </div>
+            :
+            <div className={invalid3 ? 'navbar-button invalid' : 'navbar-button'} onClick={() => buyItemScan(2500)}>
                 <div className="upgrade-title">Item Scanner</div>
                 <div className="upgrade-stats">
                     Highlight better items
@@ -129,6 +154,7 @@ function Navbar({RP, setRP, coins, setCoins, dropChance, updateChance}) {
                     <div className="upgrade-cost">2,500<img className="coin-count" src={Coin}></img></div>
                 </div>
             </div>
+            }
             <div className={invalid4 ? 'navbar-button invalid' : 'navbar-button'} onClick={() => placeholderUpgrade4(20000)}>
                 <div className="upgrade-title">Merchant</div>
                 <div className="upgrade-stats">

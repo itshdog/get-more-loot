@@ -2,7 +2,7 @@ import React from 'react';
 import LoadEquipment from './LoadEquipment.js';
 import LoadInventory from './LoadInventory.js';
 
-function Inventory({equipment, inventory}) {
+function Inventory({itemScan, setItemScan, equipRef, equipment, inventory}) {
     
     return(
         <div id="Inventory">
@@ -18,6 +18,8 @@ function Inventory({equipment, inventory}) {
                 <div className="title" style={{height: '30px'}}>Inventory</div>
                 <div id="storage-container">
                     <LoadInventory
+                        itemScan={itemScan}
+                        equipment={equipRef}
                         inventory={inventory}
                     />
                 </div>
