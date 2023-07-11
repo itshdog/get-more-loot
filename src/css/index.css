@@ -182,12 +182,15 @@ code {
   .App {
     display: block;
   }
+  #Equipment .tooltip {
+    top: 0!important;
+  }
   .tooltip {
-    position: relative;
-    top: 100%!important;
-    right: 0%!important;
-    width: 90%!important;
-    min-width: 150px!important;
+    top: -110%!important;
+    right: 25%!important;
+    width: 150px!important;
+    transform: translateX(50%);
+    transform: translateY(50%);
   }
   .tooltip button {
     width: 100%!important;
@@ -201,6 +204,18 @@ code {
     margin: 0 auto;
     height: 90%;
     min-height: 300px!important;
+  }
+  .item {
+    position: static!important;
+  }
+  .equip-box {
+    position: static!important;
+  }
+  #Equipment {
+    position: relative;
+  }
+  #storage-container {
+    position: relative;
   }
   #Inventory {
     display: inline-block;
@@ -241,7 +256,6 @@ code {
   background-color: rgba(255, 255, 255, 0.459)!important;
   border-radius: 0.5em;
   position: relative;
-  aspect-ratio: 5 / 4;
 }
 
 #Storage {
