@@ -171,8 +171,7 @@ code {
 
 @media (max-width: 1400px) {
   .App {
-    overflow: scroll!important;
-    grid-template-columns: 100%;
+    display: block;
   }
   .tooltip {
     position: relative;
