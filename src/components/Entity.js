@@ -14,8 +14,7 @@ function Entity({setEntityHP, stats, colors, entity}) {
                     <div className="total-health-bar">{stats.hp}/{stats.maxHP}</div>
                 </div>
                 <div className="stats">
-                    <div>Attack: {stats.attack}</div>
-                    <div style={{color: colors.defense}}>Defense: {stats.defense}</div>
+                    <div className="center">Attack: {stats.attack} | Defense: {stats.defense}</div>
                     <div>Drop Chance: {entity.drop}%</div>
                 </div>
             </div>

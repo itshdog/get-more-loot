@@ -22,10 +22,9 @@ function Player({stats, equip, base}) {
                     </div>
                 </div>
                 <div className="stats">
-                    <div>Total Attack: {stats.attack} | Equipment Attack: {equip.attack} | Base Attack: {base.attack}</div>
-                    <div>Total Defense: {stats.defense} | Equipment Defense: {equip.defense} | Base Defense: {base.defense}</div>
-                    <div>Critical Hit Chance: {base.critChance + equip.critChance}% (+{equip.critChance}% from equipment)</div>
-                    <div>Critical Hit Damage: {base.critDamage + equip.critDamage}% (+{equip.critDamage}% from equipment)</div>
+                    <div>Attack: {stats.attack} | Defense: {stats.defense}</div>
+                    <div>Critical Hit Chance: {base.critChance + equip.critChance}%</div>
+                    <div>Critical Hit Damage: {base.critDamage + equip.critDamage}%</div>
                 </div>
             </div>
         </div>

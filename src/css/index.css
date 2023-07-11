@@ -13,7 +13,7 @@ code {
 }
 
 .App {
-  display: inline-block;
+  height: 100%;
   background-image: url(../images/dark-brick-texture.png);
   background-repeat: repeat;
   /*background-color: rgb(109, 109, 109);*/
@@ -22,6 +22,10 @@ code {
   bottom: 0;
   right: 0;
   text-align: center;
+  display: grid;
+  grid-template-columns: 60% 12% 25%;
+  column-gap: 15px;
+
 }
 
 #logo {
@@ -29,7 +33,8 @@ code {
 }
 
 #logo img {
-  width: 75%;
+  width: 95%;
+  max-width: 750px;
 }
 
 .invalid {
@@ -45,10 +50,11 @@ code {
 
 .Navbar {
   background: rgb(63, 63, 63);
-  float: left;
-  width: calc(15% - 16px);
-  height: calc(100vh - 16px);
+  display: inline-block;
+  width: 100%;
+  max-height: 850px;
   margin: 5px;
+  margin-top: 30px;
   border: rgb(0, 0, 0, 0.5) solid 3px;
   border-radius: 0.5em;
   position: relative;
@@ -58,6 +64,17 @@ code {
   color: white;
   margin-top: 40px;
   width: 100%;
+}
+
+.Tab {
+  height: calc(100% - 50px);
+  width: 100%;
+  background: rgb(63, 63, 63);
+  z-index: 99;
+  position: absolute!important;
+  top: 0!important;
+  right: 0!important;
+  overflow-y: scroll;
 }
 
 .Navbar .navbar-button {
@@ -94,6 +111,7 @@ code {
   position: absolute;
   bottom: 10px;
   padding: 5px;
+  height: 25px;
   width: calc(100% - 10px);
 }
 
@@ -110,8 +128,9 @@ code {
 }
 
 #Content {
-  float: left;
-  width: 55%;
+  display: inline-block;
+  width: 100%;
+  height: 100vh;
 }
 
 .title {
@@ -140,37 +159,53 @@ code {
 
 #Inventory {
   background: rgb(63, 63, 63);
-  float: left;
-  width: calc(30% - 16px);
+  width: 100%;
+  max-height: 850px;
   margin: 5px;
+  margin-top: 30px;
   border: rgba(0, 0, 0, 0.5) solid 3px;
   border-radius: 0.5em;
-  display: flex;
+  display: inline-block;
   flex-flow: column;
 }
 
 @media (max-width: 1400px) {
-  .item {
-    max-width: 120px!important;
+  .App {
+    overflow: scroll!important;
+    grid-template-columns: 100%;
   }
   .tooltip {
-    top: -170%!important;
+    position: relative;
+    top: 100%!important;
     right: 0%!important;
-    width: 85px!important;
+    width: 90%!important;
+    min-width: 150px!important;
   }
   .tooltip button {
     width: 100%!important;
     display: inline-block;
   }
   .Navbar {
-    display: none;
+    float: none;
+    display: inline-block;
+    width: calc(100% - 30px);
+    max-width: 500px;
+    margin: 0 auto;
+    height: 90%;
+    min-height: 300px!important;
   }
   #Inventory {
     display: inline-block;
-    width: calc(100% - 50px);
-    margin: 100px 30px;
+    width: calc(100% - 30px);
+    max-width: 450px;
+    margin: 0 auto;
+    height: 100%;
+    margin-top: 30px;
+    margin-bottom: 100px;
   }
   #Content {
+    height: 85vh;
+    padding-top: 30%;
     width: 100%
   }
 }
@@ -404,7 +439,8 @@ code {
 }
 
 .panel {
-  width: 75%;
+  width: 90%;
+  max-width: 750px;
   background: gray;
   margin: 0 auto;
   border-radius: 0.5em;
@@ -476,14 +512,28 @@ code {
 }
 
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 12px;
+  margin: 2px;
+  }
+  
+  ::-webkit-scrollbar-track {
+  background: #0000001f;
+  border-radius: 10px;
+  width: 8px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #979797;  
+  width: 20px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+  background: #c5c5c5;  
+  }
 
 /* UNIVERSAL */
 .hidden {

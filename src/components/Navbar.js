@@ -89,7 +89,6 @@ function Navbar({RP, setRP, Admin, setAdmin, itemScan, setItemScan, coins, setCo
     }
 
     return(
-        <div>
         <div className="Navbar">
             <div className='title'>Navbar</div>
             <div className="navbar-button" style={{marginTop: '20px'}} onClick={openUpgrade}>
@@ -101,9 +100,7 @@ function Navbar({RP, setRP, Admin, setAdmin, itemScan, setItemScan, coins, setCo
             <div className="navbar-button" onClick={openSettings}>
                 Settings
             </div>
-            <NavFooter/>
-        </div>
-        <div className="Navbar Tab" style={{display: upgrade, position: 'absolute'}}>
+            <div className="Tab" style={{display: upgrade}}>
             <button className='back' onClick={openUpgrade}>Back</button>
             <div className='title'>Upgrades</div>
             <div className={invalid1 ? 'navbar-button invalid' : 'navbar-button'} onClick={() => luckyDay(luckyDayCost)} style={{marginTop: '20px'}}>
@@ -166,15 +163,13 @@ function Navbar({RP, setRP, Admin, setAdmin, itemScan, setItemScan, coins, setCo
                     <div className="upgrade-cost">20,000<img className="coin-count" src={Coin}></img></div>
                 </div>
             </div>
-            <NavFooter/>
         </div>
-        <div className="Navbar Tab" style={{display: stats, position: 'absolute'}}>
+        <div className="Tab" style={{display: stats}}>
             <button className='back' onClick={openStats}>Back</button>
             <div className='title'>Statistics</div>
             Work in progress...
-            <NavFooter/>
         </div>
-        <div className="Navbar Tab" style={{display: settings, position: 'absolute'}}>
+        <div className="Tab" style={{display: settings}}>
             <button className='back' onClick={openSettings}>Back</button>
             <div className='title'>Settings</div>
             Work in progress...
@@ -188,8 +183,8 @@ function Navbar({RP, setRP, Admin, setAdmin, itemScan, setItemScan, coins, setCo
                     <div>Disabled</div>}
                 </div>
             </div>
-            <NavFooter/>
         </div>
+            <NavFooter/>
         </div>
     )
 }

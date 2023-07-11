@@ -149,19 +149,7 @@ function App() {
 
   return (
     <div className="App">
-        <Navbar 
-          RP={RP}
-          setRP={setRP}
-          Admin={admin}
-          setAdmin={updateAdmin}
-          itemScan={itemScan}
-          setItemScan={setItemScan}
-          coins={coins}
-          setCoins={updateCoins}
-          dropChance={dropChance}
-          updateChance={updateChance}
-        />
-        <Content 
+      <Content 
           inventory={inventory}
           setInventory={updateInventory}
           equipment={equipment}
@@ -175,6 +163,18 @@ function App() {
           updateChance={updateChance}
           sellItem={sellItem}
           equipItem={equipItem}
+        />
+        <Navbar 
+          RP={RP}
+          setRP={setRP}
+          Admin={admin}
+          setAdmin={updateAdmin}
+          itemScan={itemScan}
+          setItemScan={setItemScan}
+          coins={coins}
+          setCoins={updateCoins}
+          dropChance={dropChance}
+          updateChance={updateChance}
         />
         <Inventory 
           itemScan={itemScan}
