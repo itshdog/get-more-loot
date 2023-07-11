@@ -170,6 +170,15 @@ code {
 }
 
 @media (max-width: 1400px) {
+  #Admin {
+    height: 100%;
+    margin-bottom: 20px;
+  }
+  .admin-buttons {
+    column-gap: 0;
+    grid-column-gap: 0;
+    grid-template-columns: repeat(2, 1fr);
+  }
   .App {
     display: block;
   }
@@ -203,7 +212,8 @@ code {
     margin-bottom: 100px;
   }
   #Content {
-    height: 85vh;
+    height: 100%;
+    min-height: 80vh;
     padding-top: 30%;
     width: 100%
   }
