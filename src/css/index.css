@@ -183,14 +183,15 @@ code {
     display: block;
   }
   #Equipment .tooltip {
-    top: 0!important;
+    top: 50%!important;
+    right: 50%!important;
+    transform: translate(50%, 50%);
   }
   .tooltip {
     top: -110%!important;
-    right: 25%!important;
+    right: 50%!important;
     width: 150px!important;
-    transform: translateX(50%);
-    transform: translateY(50%);
+    transform: translate(50%, 50%);
   }
   .tooltip button {
     width: 100%!important;
@@ -256,6 +257,7 @@ code {
   background-color: rgba(255, 255, 255, 0.459)!important;
   border-radius: 0.5em;
   position: relative;
+  min-height: 110px;
 }
 
 #Storage {
