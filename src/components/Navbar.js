@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NavFooter from './NavFooter.js';
 import Coin from '../images/icons/48x48/coin_01d.png'
 
-function Navbar({RP, setRP, Admin, setAdmin, itemScan, setItemScan, coins, setCoins, dropChance, updateChance}) {
+function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, coins, setCoins, dropChance, updateChance}) {
 
     const [upgrade, setUpgrade] = useState('none');
     const [stats, setStats] = useState('none');
@@ -100,6 +100,7 @@ function Navbar({RP, setRP, Admin, setAdmin, itemScan, setItemScan, coins, setCo
             <div className="navbar-button" onClick={openSettings}>
                 Settings
             </div>
+
             <div className="Tab" style={{display: upgrade}}>
             <button className='back' onClick={openUpgrade}>Back</button>
             <div className='title'>Upgrades</div>
@@ -167,12 +168,13 @@ function Navbar({RP, setRP, Admin, setAdmin, itemScan, setItemScan, coins, setCo
         <div className="Tab" style={{display: stats}}>
             <button className='back' onClick={openStats}>Back</button>
             <div className='title'>Statistics</div>
-            Work in progress...
+            <div className='stat-row'>Enemies Killed: {statInfo['enemies_killed']}</div>
+            <div className='stat-row'>Items Dropped: {statInfo['items_dropped']}</div>
+            <div className='stat-row'>Average Drop Percentage: {(parseFloat(statInfo['items_dropped'] / statInfo['enemies_killed'] * 100).toFixed(2))}%</div>
         </div>
         <div className="Tab" style={{display: settings}}>
             <button className='back' onClick={openSettings}>Back</button>
             <div className='title'>Settings</div>
-            Work in progress...
             <div className='navbar-button' onClick={openAdmin}>
                 <div className='settings-title'>Enable Admin Panel</div>
                 <div className='settings-info'>For developer/testing purposes</div>

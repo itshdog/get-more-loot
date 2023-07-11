@@ -62,7 +62,7 @@ code {
 
 .Navbar .title {
   color: white;
-  margin-top: 40px;
+  margin: 25px 0 15px 0;
   width: 100%;
 }
 
@@ -88,6 +88,19 @@ code {
 
 .Navbar .navbar-button:hover {
   background-color:rgba(255, 255, 255, 0.397);
+}
+
+.stat-row {
+  color: rgb(192, 192, 192);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 2px;
+  margin: 3px;
+}
+
+.stat-row:hover {
+  background: rgba(255, 255, 255, 0.2);
+  cursor: default;
 }
 
 .upgrade-title {
@@ -137,7 +150,6 @@ code {
   color: white;
   font-size: 26px;
   font-weight: 700;
-
 }
 
 .admin-buttons {

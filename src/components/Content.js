@@ -4,7 +4,7 @@ import Item from './Item.js';
 import React, { useState, useEffect } from 'react';
 import logo from '../images/logo.png'
 
-function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, setRP, coins, setCoins, dropChance, updateChance, sellItem, equipItem}) {
+function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, stats, setStats, coins, setCoins, dropChance, sellItem, equipItem}) {
 
     /* Attack */
     const [baseATK, setBaseATK] = useState(5);
@@ -63,6 +63,9 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
             } else if (entityHP <= 0 + playerATK) {
                 giveDrops();
                 giveLoot();
+                let newStats = stats
+                newStats['enemies_killed'] = (newStats['enemies_killed'] || 0) + 1
+                setStats(newStats);
                 spawnEntity();
             /* Entity alive */
             } else {
@@ -208,7 +211,7 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
             }
 
             /* Load loot into inventory array */
-            let id = parseInt(Math.floor(Math.random() * 10000))
+            let id = Math.random().toString(36).replace(/[^a-z0-9]+/g, '').substring(1, 5);
 
             const listModifiers = [['Critical Hit Chance', 2], ['Critical Hit Damage', 5]]
             if (modifiers === 1) {
@@ -217,6 +220,10 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
             } else if (modifiers === 2) {
                 affixes = listModifiers
             }
+
+            let newStats = stats
+            newStats['items_dropped'] = (newStats['items_dropped'] || 0) + 1
+            setStats(newStats)
 
             const newLoot = [
                 ...inventory,

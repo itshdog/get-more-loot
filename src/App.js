@@ -13,6 +13,14 @@ function App() {
     setAdmin(adm);
   }, [setAdmin])
 
+  /* Statistics */
+  const [stats, setStats] = useState({"enemies_killed": 0, "items_dropped": 0});
+  const statRef = useRef();
+  const updateStats = useCallback(stat => {
+    statRef.current = stat
+    setStats(stat);
+  });
+
   /* Inventory */
   const [inventory, setInventory] = useState([])
   const invRef = useRef();
@@ -156,11 +164,11 @@ function App() {
           setEquipment={updateEquipment}
           Admin={admin}
           RP={RP}
-          setRP={setRP}
+          stats={stats}
+          setStats={updateStats}
           coins={coins}
           setCoins={updateCoins}
           dropChance={dropChance}
-          updateChance={updateChance}
           sellItem={sellItem}
           equipItem={equipItem}
         />
@@ -169,6 +177,7 @@ function App() {
           setRP={setRP}
           Admin={admin}
           setAdmin={updateAdmin}
+          statInfo={stats}
           itemScan={itemScan}
           setItemScan={setItemScan}
           coins={coins}
