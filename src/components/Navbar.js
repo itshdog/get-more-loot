@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import NavFooter from './NavFooter.js';
 import Coin from '../images/icons/48x48/coin_01d.png'
 
-function Navbar({RP, setRP, itemScan, setItemScan, coins, setCoins, dropChance, updateChance}) {
+function Navbar({RP, setRP, Admin, setAdmin, itemScan, setItemScan, coins, setCoins, dropChance, updateChance}) {
 
     const [upgrade, setUpgrade] = useState('none');
     const [stats, setStats] = useState('none');
     const [settings, setSettings] = useState('none');
+
+    const openAdmin = () => { (Admin === false) ? setAdmin(true) : setAdmin(false) }
 
     const openUpgrade = () => {
         if (upgrade === 'none') {
@@ -176,6 +178,16 @@ function Navbar({RP, setRP, itemScan, setItemScan, coins, setCoins, dropChance, 
             <button className='back' onClick={openSettings}>Back</button>
             <div className='title'>Settings</div>
             Work in progress...
+            <div className='navbar-button' onClick={openAdmin}>
+                <div className='settings-title'>Enable Admin Panel</div>
+                <div className='settings-info'>For developer/testing purposes</div>
+                <div class='switch'>
+                    {Admin ?
+                    <div>Enabled</div>
+                    :
+                    <div>Disabled</div>}
+                </div>
+            </div>
             <NavFooter/>
         </div>
         </div>

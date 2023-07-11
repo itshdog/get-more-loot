@@ -13,8 +13,10 @@ code {
 }
 
 .App {
-  background-color: rgb(109, 109, 109);
-  position: fixed;
+  display: inline-block;
+  background-image: url(../images/dark-brick-texture.png);
+  background-repeat: repeat;
+  /*background-color: rgb(109, 109, 109);*/
   top: 0;
   left: 0;
   bottom: 0;
@@ -42,12 +44,12 @@ code {
 }
 
 .Navbar {
-  background: gray;
+  background: rgb(63, 63, 63);
   float: left;
   width: calc(15% - 16px);
   height: calc(100vh - 16px);
   margin: 5px;
-  border: rgb(92, 92, 92) solid 3px;
+  border: rgb(0, 0, 0, 0.5) solid 3px;
   border-radius: 0.5em;
   position: relative;
 }
@@ -88,7 +90,7 @@ code {
 
 .Navbar .navbar-footer {
   font-size: 0.75em;
-  color:rgba(0, 0, 0, 0.377);
+  color:rgb(172, 172, 172);
   position: absolute;
   bottom: 10px;
   padding: 5px;
@@ -96,6 +98,7 @@ code {
 }
 
 .Navbar .navbar-links a {
+  color: rgb(230, 194, 96);
   font-size: 1em;
   padding: 0 5px;
   font-weight: 700;
@@ -109,7 +112,6 @@ code {
 #Content {
   float: left;
   width: 55%;
-  height: 100%;
 }
 
 .title {
@@ -137,15 +139,40 @@ code {
 }
 
 #Inventory {
-  background: gray;
+  background: rgb(63, 63, 63);
   float: left;
   width: calc(30% - 16px);
-  height: calc(100% - 16px);
   margin: 5px;
-  border: rgb(92, 92, 92) solid 3px;
+  border: rgba(0, 0, 0, 0.5) solid 3px;
   border-radius: 0.5em;
   display: flex;
   flex-flow: column;
+}
+
+@media (max-width: 1400px) {
+  .item {
+    max-width: 120px!important;
+  }
+  .tooltip {
+    top: -170%!important;
+    right: 0%!important;
+    width: 85px!important;
+  }
+  .tooltip button {
+    width: 100%!important;
+    display: inline-block;
+  }
+  .Navbar {
+    display: none;
+  }
+  #Inventory {
+    display: inline-block;
+    width: calc(100% - 50px);
+    margin: 100px 30px;
+  }
+  #Content {
+    width: 100%
+  }
 }
 
 #Inventory .title {
@@ -170,6 +197,7 @@ code {
   background-color: rgba(255, 255, 255, 0.459)!important;
   border-radius: 0.5em;
   position: relative;
+  aspect-ratio: 5 / 4;
 }
 
 #Storage {
@@ -223,10 +251,11 @@ code {
 .equip-box .item {
   border-radius: 0.5em;
   width: 90%;
-  max-width: 70px;
+  max-width: 80px;
   aspect-ratio: 1 / 1;
   margin: 0 auto;
   margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .equip-box .item .img-container {
@@ -366,6 +395,8 @@ code {
 
 #Restart {
   margin-top: 20px;
+  color: white;
+  font-weight: 700;
 }
 
 #Restart #restart-button {
@@ -432,6 +463,29 @@ code {
   top: -22px;
 }
 
+/* SETTINGS NAVBAR */
+.settings-title {
+  text-align: left;
+  padding-left: 10px;
+}
+
+.settings-info {
+  font-size: 10px;
+  text-align: left;
+  padding-left: 10px;
+}
+
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* UNIVERSAL */
 .hidden {
   display: none;
 }

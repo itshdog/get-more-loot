@@ -8,9 +8,7 @@ Design
 Navbar buttons
 * Make them work and open new panels that slide in to replace the current Navbar
     * Upgrades
-        * Higher chance for loot (30%, increase by 1%)
         * Automatically start over (Include enable button) (Seems OP but tbd)
-        * Show better loot (Highlight loot with green border) (I like this but needs inventory done first)
         * Auto sell bad loot
     * Statistics
         * Number of killed enemies
@@ -20,7 +18,7 @@ Navbar buttons
         * Color themes
         * Rendering stuff?
     * Versions
-        * Once 1.0 is released, add a versions percentage
+        * Once 1.0 is released, add a versions page
             * Update with new features for each update
 
 Inventory
@@ -46,3 +44,10 @@ Enemies
 * Health around 6-8x more than regular enemies.
 * ATK and DEF definitely higher too. 2-3x?
 * Potentially boss specific items, but that's much later into the game development. 
+
+-- LATE STAGE IDEAS --
+Paragon at Level 100 -> Prestige?
+Paragon points when you reset; Spend paragon points like heavenly chips in Cookie Clicker
+Restart over at level 1 when you prestige. 
+
+Perhaps fun design upgrades for paragon points too? Cool themes, colors, skins, etc?

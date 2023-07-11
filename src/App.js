@@ -5,6 +5,14 @@ import Content from './components/Content.js';
 import Inventory from './components/Inventory.js';
 
 function App() {
+  /* Admin Panel Bool */
+  const [admin, setAdmin] = useState(false)
+  const adminRef = useRef();
+  const updateAdmin = useCallback(adm => {
+    adminRef.current = adm
+    setAdmin(adm);
+  }, [setAdmin])
+
   /* Inventory */
   const [inventory, setInventory] = useState([])
   const invRef = useRef();
@@ -144,6 +152,8 @@ function App() {
         <Navbar 
           RP={RP}
           setRP={setRP}
+          Admin={admin}
+          setAdmin={updateAdmin}
           itemScan={itemScan}
           setItemScan={setItemScan}
           coins={coins}
@@ -156,6 +166,7 @@ function App() {
           setInventory={updateInventory}
           equipment={equipment}
           setEquipment={updateEquipment}
+          Admin={admin}
           RP={RP}
           setRP={setRP}
           coins={coins}

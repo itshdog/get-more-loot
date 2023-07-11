@@ -4,7 +4,7 @@ import Item from './Item.js';
 import React, { useState, useEffect } from 'react';
 import logo from '../images/logo.png'
 
-function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, coins, setCoins, dropChance, updateChance, sellItem, equipItem}) {
+function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, setRP, coins, setCoins, dropChance, updateChance, sellItem, equipItem}) {
 
     /* Attack */
     const [baseATK, setBaseATK] = useState(5);
@@ -15,13 +15,11 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
     const [equipDEF, setEquipDEF] = useState(0);
     const [playerDEF, setPlayerDEF] = useState(0);
     /* Critical Hit Damage */
-    const [baseCritDamage, setBaseCritDamage] = useState(1);
+    const [baseCritDamage, setBaseCritDamage] = useState(50);
     const [equipCritDamage, setEquipCritDamage] = useState(0);
-    const [playerCritDamage, setPlayerCritDamage] = useState(0);
     /* Critical Strike Chance */
-    const [baseCritChance, setBaseCritChance] = useState(50);
+    const [baseCritChance, setBaseCritChance] = useState(5);
     const [equipCritChance, setEquipCritChance] = useState(0);
-    const [playerCritChance, setPlayerCritChance] = useState(0);
     /* Player */
     const [playerLevel, setPlayerLevel] = useState(1);
     const [playerHP, setPlayerHP] = useState(100);
@@ -80,6 +78,8 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
         /* Set totals */
         let newEquipATK = 0
         let newEquipDEF = 0
+        let newCritDMG = 0
+        let newCritCHANCE = 0
         for (let i = 0; i < equipment.length; i++) {
             /* If no equipment, continue */
             if (equipment[i] === undefined) {
@@ -91,10 +91,24 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
             } else if (equipment[i].props.stats.type === "Armor") {
                 newEquipDEF += equipment[i].props.stats.base
             }
+            /* Increase affixes if item is NOT common, meaning 0 added stats */
+            if (equipment[i].props.info.rarity !== 'Common' ) {
+                /* Iterate all added affixes */
+                for (var j = 0; j < equipment[i].props.affixes.length; j++) {
+                    /* Incrase CritDMG and CritChance as needed */
+                    if (equipment[i].props.affixes[j][0] === "Critical Hit Damage") {
+                        newCritDMG += equipment[i].props.affixes[j][1]
+                    } else if (equipment[i].props.affixes[j][0] === "Critical Hit Chance") {
+                        newCritCHANCE += equipment[i].props.affixes[j][1]
+                    }
+                }
+            }
         }
         /* Set new equipment stats */
         setEquipATK(newEquipATK);
         setEquipDEF(newEquipDEF);
+        setEquipCritDamage(newCritDMG);
+        setEquipCritChance(newCritCHANCE);
     /* Update whenever equipment chances */
     }, [equipment])
 
@@ -299,7 +313,16 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
     }
 
     const hitEntity = () => {
-        setEntityHP(Math.min(entityHP, entityHP - (playerATK - entityDEF)));
+        let critHit = Math.floor(Math.random() * 100);
+        if (critHit <= (99 - (equipCritChance + baseCritChance))) {
+            /* REGULAR HIT */
+            setEntityHP(Math.min(entityHP, entityHP - (playerATK - entityDEF)));
+        } else {
+            /* CRITICAL HIT */
+            let critDMG = Math.floor(playerATK * (1 + ((baseCritDamage + equipCritDamage)/100)))
+            console.log("CRITICAL HIT! " + playerATK + "dmg -> " + critDMG + "dmg");
+            setEntityHP(Math.min(entityHP, Math.floor(entityHP - (critDMG - entityDEF))));
+        }
     }
 
     const hitPlayer = () => {
@@ -369,8 +392,8 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
             </div>
             <Player 
                 stats={{level: playerLevel, attack: playerATK, defense: playerDEF, hp: playerHP, maxHP: playerMAXHP, xp: playerXP, maxXP: playerMAXXP, coins: coins}}
-                equip={{attack: playerATK - baseATK, defense: playerDEF - baseDEF,}}
-                base={{attack: baseATK, defense: baseDEF}}
+                equip={{attack: playerATK - baseATK, defense: playerDEF - baseDEF, critChance: equipCritChance, critDamage: equipCritDamage}}
+                base={{attack: baseATK, defense: baseDEF, critChance: baseCritChance, critDamage: baseCritDamage}}
             />
             <Entity 
                 setEntityHP={{setEntityHP}}
@@ -394,7 +417,8 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
                     </button>
             }
             <div/>
-            <div id="Admin" className="hidden">
+        { Admin ?
+        <div id="Admin">
             <div className="panel" style={{marginTop: '20px'}}>
                 <div className='title' style={{padding: '5px'}}>Admin Panel</div>
                 <div className='admin-buttons'>
@@ -421,6 +445,9 @@ function Content({inventory, setInventory, equipment, setEquipment, RP, setRP, c
                 </div>
             </div>
         </div>
+        :
+        <div></div>
+        }
         </div>
         </div>
     )
