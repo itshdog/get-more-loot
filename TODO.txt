@@ -5,13 +5,20 @@ Design
 * Go to Fiverr and get someone to make a design palette for the game
 * Add CSS for mobile devices
 
+stats
+* Add modifiers to specific items
+* +2-5% block chance (gloves, offhand) 
+* +10-100 maximum health (helm, chest, boots)
+* +10-25% gold drops (amulet, accessory, ring)
+* +5% damage (weapon, offhand)
+* +10% XP (accessory, amulet, ring)
+
 Navbar buttons
 * Make them work and open new panels that slide in to replace the current Navbar
     * Upgrades
         * Automatically start over (Include enable button) (Seems OP but tbd)
         * Auto sell bad loot
     * Statistics
-        * Number of killed enemies
         * Number of times died
         * Total xp received
     * Settings
