@@ -23,7 +23,7 @@ code {
   right: 0;
   text-align: center;
   display: grid;
-  grid-template-columns: 60% 12% 25%;
+  grid-template-columns: 60% 37%;
   column-gap: 15px;
 
 }
@@ -48,11 +48,17 @@ code {
   margin: 10px;
 }
 
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
 .Navbar {
   background: rgb(63, 63, 63);
   display: inline-block;
-  width: 100%;
-  max-height: 850px;
+  width: 30%;
+  min-width: 190px;
+  height: 85%;
   margin: 5px;
   margin-top: 30px;
   border: rgb(0, 0, 0, 0.5) solid 3px;
@@ -171,9 +177,10 @@ code {
 }
 
 #Inventory {
+  flex: 1;
+  height: 85%;
   background: rgb(63, 63, 63);
   width: 100%;
-  max-height: 850px;
   margin: 5px;
   margin-top: 30px;
   border: rgba(0, 0, 0, 0.5) solid 3px;
@@ -191,6 +198,9 @@ code {
     column-gap: 0;
     grid-column-gap: 0;
     grid-template-columns: repeat(2, 1fr);
+  }
+  .wrapper {
+    display: inline-block;
   }
   .App {
     display: block;
@@ -253,7 +263,6 @@ code {
 }
 
 #Equipment {
-  height: 50%;
   margin: 0 35px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -274,11 +283,7 @@ code {
 }
 
 #Storage {
-  flex: 0 1 250px;
-}
-
-#Inventory #Storage {
-  flex: 0 1 auto;
+  padding-top: 20px;
 }
 
 #storage-container {

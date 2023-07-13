@@ -172,6 +172,7 @@ function App() {
           sellItem={sellItem}
           equipItem={equipItem}
         />
+        <div className="wrapper">
         <Navbar 
           RP={RP}
           setRP={setRP}
@@ -194,6 +195,7 @@ function App() {
           inventory={inventory} 
           setInventory={updateInventory}
         />
+        </div>
     </div>
   );
 }
