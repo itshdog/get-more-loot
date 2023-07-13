@@ -7,11 +7,11 @@ Design
 
 stats
 * Add modifiers to specific items
-* +2-5% block chance (gloves, offhand) 
-* +10-100 maximum health (helm, chest, boots)
-* +10-25% gold drops (amulet, accessory, ring)
-* +5% damage (weapon, offhand)
-* +10% XP (accessory, amulet, ring)
+* +2-5% block chance (gloves, offhand) 2 + Math.floor(Math.random() * 4)
+* +10-100 maximum health (helm, chest, boots) 10 + Math.floor(Math.random() * 91)
+* +10-25% gold drops (amulet, accessory, ring) 5 + Math.floor(Math.random() * 21)
+* +5% damage (weapon, offhand) 1 + Math.floor(Math.random() * 5)
+* +10% XP (accessory, amulet, ring) 1 + Math.floor(Math.random() * 10)
 
 Navbar buttons
 * Make them work and open new panels that slide in to replace the current Navbar
