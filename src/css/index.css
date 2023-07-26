@@ -263,10 +263,9 @@ code {
 }
 
 #Equipment {
-  margin: 0 35px;
+  margin: 0 20px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
   column-gap: 20px;
   row-gap: 5px;
 }
@@ -276,14 +275,11 @@ code {
 }
 
 .equip-box {
+  position: relative;
   background-color: rgba(255, 255, 255, 0.459)!important;
   border-radius: 0.5em;
-  position: relative;
-  min-height: 110px;
-}
-
-#Storage {
-  padding-top: 20px;
+  height: 100%;
+  min-height: 100px;
 }
 
 #storage-container {
@@ -328,18 +324,15 @@ code {
 
 .equip-box .item {
   border-radius: 0.5em;
-  width: 90%;
-  max-width: 80px;
-  aspect-ratio: 1 / 1;
-  margin: 0 auto;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin: 5px;
+  height: 80px;
 }
 
 .equip-box .item .img-container {
   position: relative;
+  aspect-ratio: 1 / 1;
   height: 100%;
-  width: 100%;
+  margin: 0 auto;
 }
 
 .equip-box .item .img-container img {
@@ -351,18 +344,6 @@ code {
   left: 0;
   right: 0;
   margin: auto;
-}
-
-.Common {
-  background-color: none;
-}
-
-.Uncommon {
-  background-color: green;
-}
-
-.Rare {
-  background-color: blue;
 }
 
 .item-box .tooltip {
@@ -377,6 +358,7 @@ code {
   right: 100%;
   width: 150px;
   text-align: left;
+  font-size: 10px;
 }
 
 .item-box:hover .tooltip {
@@ -395,6 +377,7 @@ code {
   right: 100%;
   width: 150px;
   text-align: left;
+  font-size: 10px;
 }
 
 .equip-box .tooltip button {
@@ -405,27 +388,91 @@ code {
   margin-top: 0;
 }
 
-.tooltip-stat-small {
-  font-size: 10px;
+.tooltip-stat  {
+  font-size: 16px;
 }
 
 .equip-box:hover .tooltip {
   display: block;
 }
 
-.tooltip-rarity-Common {
+.tooltip:hover {
+  display: block;
+}
+
+.rarity-Common {
+  font-size: 700;
   color: lightgray!important;
-  font-size: 10px;
 }
 
-.tooltip-rarity-Uncommon {
+.Common {
+  background-color: none;
+}
+
+.rarity-Uncommon {
   color: rgb(77, 230, 77)!important;
-  font-size: 10px;
 }
 
-.tooltip-rarity-Rare {
+.Uncommon {
+  background-color: rgb(77, 230, 77);
+}
+
+.rarity-Rare {
   color: rgb(75, 75, 207)!important;
-  font-size: 10px;
+}
+
+.Rare {
+  background-color: rgb(75, 75, 207)
+}
+
+.rarity-Epic {
+  font-size: 700;
+  color: rgb(199, 89, 226)!important;
+}
+
+.Epic {
+  background-color: rgb(199, 89, 226)
+}
+
+
+.rarity-Elite {
+  color: rgb(124, 16, 224)!important;
+}
+
+.Elite {
+  background-color: rgb(124, 16, 224)
+}
+
+.rarity-Legendary {
+  color: rgb(252, 151, 68)!important;
+}
+
+.Legendary {
+  background-color: rgb(252, 151, 68)
+}
+
+.rarity-Mythic {
+  color: rgb(248, 232, 86)!important;
+}
+
+.Mythic {
+  background-color: rgb(248, 232, 86)
+}
+
+.rarity-Exotic {
+  color: rgb(255, 146, 146)!important;
+}
+
+.Exotic {
+  background-color: rgb(255, 146, 146)
+}
+
+.rarity-Ultimate {
+  color: rgb(255, 0, 0)!important;
+}
+
+.Ultimate {
+  background-color: rgb(255, 0, 0)
 }
 
 .tooltip .tooltip-title {
@@ -460,6 +507,23 @@ code {
 .coin {
   height: 1.5em!important;
   transform: translateY(4px);
+}
+
+/* Rarity Display */
+#rarity-display {
+  width: 100%;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-evenly;
+}
+
+.rarity-tab {
+  text-shadow: 1px 1px 2px rgba(16, 16, 17, 0.541);
+  width: fit-content;
+  align-self: center;
 }
 
 #Player {

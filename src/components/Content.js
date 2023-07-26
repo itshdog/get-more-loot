@@ -44,8 +44,6 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
     const Names = ['Banechild', 'Thunderthing', 'Soulmirage', 'Steamsoul', 'Auracreep', 'Vexmutant', 'Terrorbug', 'Metalcrackle', 'Soilspawn', 'Dreamserpent', 'Vilegolem', 'Shadowwoman', 'Webspawn', 'Infernalghoul', 'Bowelmutant', 'Glowsnake', 'Acidscreamer', 'Toxinhound', 'Steamteeth', 'Infernobrood', 'Emberfoot', 'Webstrike', 'Rustvine', 'Barbmask', 'Slagwing', 'Vortexfiend', 'Thunderhand', 'Blazeflayer', 'Boneseeker', 'Spiritstep', 'Bladefigure', 'Thundertree', 'Murksoul', 'Boulderboy', 'Cloudseeker', 'Slagfigure', 'Frostsnake', 'Smokewing', 'Moldhound', 'Bladetaur', 'Gutsoul', 'Fetidhood', 'Smokeboy', 'Frightbrute', 'Banepaw', 'Cursestrike', 'Grieveface', 'Terrorlich', 'Murkbug', 'Fogmirage', 'Vileman', 'Sorrowbug']
     const Enemies = ['Zombie', 'Skeleton', 'Spider', 'Goblin', 'Soldier', 'Troll', 'Cultist', 'Vampire', 'Witch', 'Wizard', 'Warlock', 'Warrior', 'Human', 'Alien', 'Baby', 'Android', 'Robot', 'Martian', 'Dragonborn', 'Dwarf', 'Elf', 'Gnome', 'Half-elf', 'Centaur', 'Fairy', 'Goliath', 'Orc', 'Minotaur']
     const Adjectives = ['Common', 'Worst', 'Old', 'Great', 'Greatest', 'Dangerous', 'Mortal', 'Bitter', 'Real', 'Natural', 'Formidable', 'Public', 'Powerful', 'Foreign', 'Last', 'Implacable', 'Deadly', 'Potential', 'Personal', 'Chief', 'Main', 'Ancient', 'Bitterest', 'Inveterate', 'External', 'Open', 'Former', 'Traditional', 'Alien', 'Hereditary', 'Principal', 'Avowed', 'Declared', 'Victorious', 'Terrible', 'Superior', 'Invisible', 'Unseen', 'Cruel', 'Secret', 'Mine', 'Hated', 'Active', 'Internal', 'Arch', 'Fallen', 'Invading', 'Dead', 'Deadliest', 'Vanquished', 'Eternal', 'Unknown', 'Worse', 'Irreconcilable', 'Armed', 'Relentless', 'Hidden', 'Biggest', 'Conquered', 'Insidious', 'Ruthless', 'Fierce', 'Generous', 'Imaginary', 'Brave', 'Savage', 'Outside', 'Ultimate', 'Treacherous', 'Violent', 'Elusive', 'Evil', 'Stronger', 'Communist']
-    /* Item names */
-    const Items = ["Iron Sword", "Iron Chestplate", "Iron Boots", "Iron Helmet", "Amulet", "Iron Ring", "Iron Shield", "Iron Gloves", "Damage Tome", "Gold Sword", "Wizard Hat", "Protection Amulet", "Gold Ring", "Iron Tower Shield", "Armor Tome"]
 
     /* On load, generate random enemy name */
     useEffect(() => {
@@ -128,6 +126,29 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
         }
     }, [entityLevel])
 
+    /* Rarities */
+    let rarities = {
+        "Ultimate": 1,
+        "Exotic": 4,
+        "Mythic": 10,
+        "Legendary": 25,
+        "Elite": 50,
+        "Epic": 250,
+        "Rare": 475,
+        "Uncommon": 2750,
+        "Common": 5500
+    }
+    let totalWeight = 0
+    for (const [key, value] of Object.entries(rarities)) {
+        totalWeight += value
+    }
+    useEffect(() => {
+        totalWeight = 0
+        for (const [key, value] of Object.entries(rarities)) {
+            totalWeight += value
+        }
+    }, [rarities])
+
     /* Chance to drop item */
     const giveLoot = () => {
         let random = Math.floor(Math.random() * 100);
@@ -141,26 +162,63 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
             let itemType = ""
             let statBase = 2
             let statType = ""
+            /* Sell value */
             let value = 0
+            /* Number of affixes to give */
             let modifiers = 0
+            /* Affix storage */
             let affixes = []
-
+            
+            /* Item names */
+            const Items = ["Iron Sword", "Iron Chestplate", "Iron Boots", "Iron Helmet", "Amulet", "Iron Ring", "Iron Shield", "Iron Gloves", "Damage Tome", "Gold Sword", "Wizard Hat", "Protection Amulet", "Gold Ring", "Iron Tower Shield", "Armor Tome"]
             let itemName = Items[(Math.random() * Items.length | 0)]
-            let chances = Math.floor(Math.random() * 100)
+            console.log(totalWeight)
+            let chances = Math.floor(Math.random() * totalWeight)
+            let counter = 0
 
-            if (chances < 100 && chances > 95) {
-                itemRarity = "Rare"
-                statBase = statBase + 2
-                value = 25
-                modifiers = 2
-            } else if (chances < 95 && chances > 70) {
-                itemRarity = "Uncommon"
-                statBase = statBase + 1
-                value = 15
-                modifiers = 1
-            } else {
-                itemRarity = "Common"
-                value = 10
+            console.log(chances)
+
+            for (const [key, v]  of Object.entries(rarities)) {
+                counter += v
+                if (chances <= counter) {
+                    itemRarity = key
+                    if (key === 'Ultimate') {
+                        value = 400
+                        modifiers = 4
+                        statBase += 25
+                    } else if (key === 'Exotic') {
+                        value = 250
+                        modifiers = 4
+                        statBase += 18
+                    } else if (key === 'Mythic') {
+                        value = 150
+                        modifiers = 3
+                        statBase += 13
+                    } else if (key === 'Legendary') {
+                        value = 75
+                        modifiers = 3
+                        statBase += 9
+                    } else if (key === 'Elite') {
+                        value = 50
+                        modifiers = 2
+                        statBase += 6
+                    } else if (key === 'Epic') {
+                        value = 35
+                        modifiers = 2
+                        statBase += 4
+                    } else if (key === 'Rare') {
+                        value = 25
+                        modifiers = 1
+                        statBase += 2
+                    } else if (key === 'Uncommon') {
+                        value = 15
+                        modifiers = 1
+                        statBase += 1
+                    } else if (key === 'Common') {
+                        value = 10
+                    }
+                    break
+                }
             }
 
             if (itemName === "Iron Sword") {
@@ -211,14 +269,11 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
             }
 
             /* Load loot into inventory array */
-            let id = Math.random().toString(36).replace(/[^a-z0-9]+/g, '').substring(1, 5);
+            let id = Math.random().toString(36).replace(/[^a-z0-9]+/g, '').substring(1, 6);
 
-            const listModifiers = [['Critical Hit Chance', 2], ['Critical Hit Damage', 5]]
-            if (modifiers === 1) {
+            const listModifiers = [['Critical Hit Chance', 2], ['Critical Hit Damage', 5], ['Block Chance', 3], ['Maximum Health', 25], ['Gold Drops', 15], ['Damage', 5], ['XP', 10]]
+            if (modifiers != 0) {
                 affixes = [listModifiers[Math.floor(Math.random() * listModifiers.length)]]
-
-            } else if (modifiers === 2) {
-                affixes = listModifiers
             }
 
             let newStats = stats
@@ -401,12 +456,13 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
                 stats={{level: playerLevel, attack: playerATK, defense: playerDEF, hp: playerHP, maxHP: playerMAXHP, xp: playerXP, maxXP: playerMAXXP, coins: coins}}
                 equip={{attack: playerATK - baseATK, defense: playerDEF - baseDEF, critChance: equipCritChance, critDamage: equipCritDamage}}
                 base={{attack: baseATK, defense: baseDEF, critChance: baseCritChance, critDamage: baseCritDamage}}
+                dropRates={{rarities: rarities, weight: totalWeight}}
             />
             <Entity 
                 setEntityHP={{setEntityHP}}
                 entity={{name: entityName, drop: dropChance}}
                 stats={{level: entityLevel, count: entityCOUNT, attack: entityATK, defense: entityDEF, hp: entityHP, maxHP: entityMAXHP}}
-                colors={{defense: defenseColor}}
+                dropRates={{rarities: rarities, weight: totalWeight}}
             />
             <div id="Restart">
                 { RP ? 
