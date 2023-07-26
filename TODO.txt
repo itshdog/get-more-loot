@@ -18,7 +18,11 @@ Navbar buttons
     * Upgrades
         * Automatically start over (Include enable button) (Seems OP but tbd)
         * Auto sell bad loot
+        * Storage upgrades
+            * tabs
+            * page size
     * Statistics
+        * Number of times started over
         * Number of times died
         * Total xp received
     * Settings
@@ -29,10 +33,9 @@ Navbar buttons
             * Update with new features for each update
 
 Inventory
-* loot
-    * add more rarities: epic, elite, legendary, mythic, exotic, ultimate
-    * Progressive drop chances at higher levels
-    * Include stats for drop chances, progressively drop less common on higher levels
+* Storage
+    * Multiple tabs available for purchase
+    * Increase size per page purchase?
 * Equipment
     * Ring add crit chance, crit damage, attack per second, etc.
         * Unsure how to add variable attack per second
