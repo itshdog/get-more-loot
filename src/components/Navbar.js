@@ -7,11 +7,23 @@ function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, co
     const [stats, setStats] = useState('none');
     const [settings, setSettings] = useState('none');
 
+    const [selected, setSelected] = useState(['selected', '', '', '', '']);
+
     const openAdmin = () => { (Admin === false) ? setAdmin(true) : setAdmin(false) }
+
+    const openStorage = () => {
+        setSelected(['selected', '', '', '', '']);
+        setUpgrade('none');
+        setStats('none');
+        setSettings('none');
+    }
 
     const openUpgrade = () => {
         if (upgrade === 'none') {
+            setSelected(['', 'selected', '', '', '']);
             setUpgrade('block');
+            setStats('none');
+            setSettings('none');
         } else if (upgrade === 'block') {
             setUpgrade('none');
         }
@@ -19,15 +31,21 @@ function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, co
 
     const openStats = () => {
         if (stats === 'none') {
+            setSelected(['', '', 'selected', '', '']);
             setStats('block');
+            setUpgrade('none');
+            setSettings('none');
         } else if (stats === 'block') {
             setStats('none');
         }
     }
     const openSettings = () => {
         if (settings === 'none') {
+            setSelected(['', '', '', 'selected', '']);
             setSettings('block');
+            setUpgrade('none');
         } else if (settings === 'block') {
+            setSettings('none');
             setSettings('none');
         }
     }
@@ -88,17 +106,12 @@ function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, co
     }
 
     return(
-        /*<div className="Navbar">
-            <div className='title'>Navbar</div>
-            <div className="navbar-button" style={{marginTop: '20px'}} onClick={openUpgrade}>
-                Upgrades
-            </div>
-            <div className="navbar-button" onClick={openStats}>
-                Statistics
-            </div>
-            <div className="navbar-button" onClick={openSettings}>
-                Settings
-            </div>
+        <div className="Navbar">
+            <div className={"nav-button " + selected[0]} onClick={openStorage}>Storage<i class="fa-solid fa-list"></i></div>
+            <div className={"nav-button " + selected[1]} onClick={openUpgrade}>Upgrades<i class="fa-solid fa-circle-up"></i></div>
+            <div className={"nav-button " + selected[2]} onClick={openStats}>Statistics<i class="fa-solid fa-circle-up"></i></div>
+            <div className={"nav-button " + selected[3]} onClick={openSettings}>Settings<i class="fa-solid fa-sliders"></i></div>
+            <div className={"nav-button " + selected[4]} onClick={openAdmin}>Admin<i class="fa-solid fa-lock"></i></div>
 
             <div className="Tab" style={{display: upgrade}}>
             <button className='back' onClick={openUpgrade}>Back</button>
@@ -164,6 +177,7 @@ function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, co
                 </div>
             </div>
         </div>
+
         <div className="Tab" style={{display: stats}}>
             <button className='back' onClick={openStats}>Back</button>
             <div className='title'>Statistics</div>
@@ -171,28 +185,13 @@ function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, co
             <div className='stat-row'>Items Dropped: {statInfo['items_dropped']}</div>
             <div className='stat-row'>Average Drop Percentage: {(parseFloat(statInfo['items_dropped'] / statInfo['enemies_killed'] * 100).toFixed(2))}%</div>
         </div>
+
         <div className="Tab" style={{display: settings}}>
             <button className='back' onClick={openSettings}>Back</button>
             <div className='title'>Settings</div>
-            <div className='navbar-button' onClick={openAdmin}>
-                <div className='settings-title'>Enable Admin Panel</div>
-                <div className='settings-info'>For developer/testing purposes</div>
-                <div class='switch'>
-                    {Admin ?
-                    <div>Enabled</div>
-                    :
-                    <div>Disabled</div>}
-                </div>
-            </div>
         </div>
-        </div>*/
+        </div>
 
-        <div className="Navbar">
-            <div className="nav-button selected">Storage<i class="fa-solid fa-list"></i></div>
-            <div className="nav-button">Upgrades<i class="fa-solid fa-circle-up"></i></div>
-            <div className="nav-button">Settings<i class="fa-solid fa-sliders"></i></div>
-            <div className="nav-button">Admin<i class="fa-solid fa-lock"></i></div>
-        </div>
     )
 }
 
