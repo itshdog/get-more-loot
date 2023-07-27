@@ -41,6 +41,7 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
     const [defenseColor, setDefenseColor] = useState('');
 
     /* Enemy names */
+    const [bossStatus, setBossStatus] = useState('hidden');
     const Names = ['Banechild', 'Thunderthing', 'Soulmirage', 'Steamsoul', 'Auracreep', 'Vexmutant', 'Terrorbug', 'Metalcrackle', 'Soilspawn', 'Dreamserpent', 'Vilegolem', 'Shadowwoman', 'Webspawn', 'Infernalghoul', 'Bowelmutant', 'Glowsnake', 'Acidscreamer', 'Toxinhound', 'Steamteeth', 'Infernobrood', 'Emberfoot', 'Webstrike', 'Rustvine', 'Barbmask', 'Slagwing', 'Vortexfiend', 'Thunderhand', 'Blazeflayer', 'Boneseeker', 'Spiritstep', 'Bladefigure', 'Thundertree', 'Murksoul', 'Boulderboy', 'Cloudseeker', 'Slagfigure', 'Frostsnake', 'Smokewing', 'Moldhound', 'Bladetaur', 'Gutsoul', 'Fetidhood', 'Smokeboy', 'Frightbrute', 'Banepaw', 'Cursestrike', 'Grieveface', 'Terrorlich', 'Murkbug', 'Fogmirage', 'Vileman', 'Sorrowbug']
     const Enemies = ['Zombie', 'Skeleton', 'Spider', 'Goblin', 'Soldier', 'Troll', 'Cultist', 'Vampire', 'Witch', 'Wizard', 'Warlock', 'Warrior', 'Human', 'Alien', 'Baby', 'Android', 'Robot', 'Martian', 'Dragonborn', 'Dwarf', 'Elf', 'Gnome', 'Half-elf', 'Centaur', 'Fairy', 'Goliath', 'Orc', 'Minotaur']
     const Adjectives = ['Common', 'Worst', 'Old', 'Great', 'Greatest', 'Dangerous', 'Mortal', 'Bitter', 'Real', 'Natural', 'Formidable', 'Public', 'Powerful', 'Foreign', 'Last', 'Implacable', 'Deadly', 'Potential', 'Personal', 'Chief', 'Main', 'Ancient', 'Bitterest', 'Inveterate', 'External', 'Open', 'Former', 'Traditional', 'Alien', 'Hereditary', 'Principal', 'Avowed', 'Declared', 'Victorious', 'Terrible', 'Superior', 'Invisible', 'Unseen', 'Cruel', 'Secret', 'Mine', 'Hated', 'Active', 'Internal', 'Arch', 'Fallen', 'Invading', 'Dead', 'Deadliest', 'Vanquished', 'Eternal', 'Unknown', 'Worse', 'Irreconcilable', 'Armed', 'Relentless', 'Hidden', 'Biggest', 'Conquered', 'Insidious', 'Ruthless', 'Fierce', 'Generous', 'Imaginary', 'Brave', 'Savage', 'Outside', 'Ultimate', 'Treacherous', 'Violent', 'Elusive', 'Evil', 'Stronger', 'Communist']
@@ -128,14 +129,14 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
 
     /* Rarities */
     let rarities = {
-        "Ultimate": 1,
-        "Exotic": 4,
-        "Mythic": 10,
-        "Legendary": 25,
-        "Elite": 50,
-        "Epic": 250,
-        "Rare": 475,
-        "Uncommon": 2750,
+        "Ultimate": 11,
+        "Exotic": 25,
+        "Mythic": 75,
+        "Legendary": 125,
+        "Elite": 250,
+        "Epic": 500,
+        "Rare": 1000,
+        "Uncommon": 3300,
         "Common": 5500
     }
     let totalWeight = 0
@@ -273,7 +274,13 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
 
             const listModifiers = [['Critical Hit Chance', 2], ['Critical Hit Damage', 5], ['Block Chance', 3], ['Maximum Health', 25], ['Gold Drops', 15], ['Damage', 5], ['XP', 10]]
             if (modifiers != 0) {
-                affixes = [listModifiers[Math.floor(Math.random() * listModifiers.length)]]
+                for (var i = 0; i < modifiers; i++) {
+                    let pick = listModifiers[Math.floor(Math.random() * listModifiers.length)]
+                    while (affixes.includes(pick)) {
+                        pick = listModifiers[Math.floor(Math.random() * listModifiers.length)]
+                    }
+                    affixes.push(listModifiers[Math.floor(Math.random() * listModifiers.length)])
+                }
             }
 
             let newStats = stats
@@ -286,7 +293,7 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
                     equipItem={equipItem}
                     sellItem={sellItem}
                     drop={{enemy: entityName, level: entityLevel}}
-                    info={{name: itemName, id: id, rarity: itemRarity, type: itemType}}
+                    info={{name: itemName, id: id, rarity: itemRarity, type: itemType, boss: bossStatus}}
                     stats={{base: (Math.round(statBase * Math.pow(1.2, entityLevel - 1))), type: statType, value: (Math.round(value * Math.pow(1.2, entityLevel - 1)))}}
                     affixes={affixes}
                 />];
@@ -308,7 +315,7 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
             let bossATK = Math.round(entityATK * 2);
             let bossDEF = Math.round(entityDEF * 2);
             if (entityLevel%5 === 4) {
-                setEntityName("BOSS: " + entityName);
+                setBossStatus('show');
                 setEntityMAXHP(bossHP);
                 setEntityHP(bossHP);
                 setEntityATK(bossATK);
@@ -318,6 +325,7 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
             /* SPAWN REGULAR ENEMY */
             } else {
                 console.log("ENTITY LEVEL: " + entityLevel)
+                setBossStatus('hidden');
                 if (entityLevel%5 === 0) { 
                     console.log("Restore from boss");
                     let HP = Math.round((bossHP / 4) * 1.2)
@@ -343,6 +351,7 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
             setEntityLevel(entityLevel + 1);
         /* Count up if 1-4 enemies killed*/
         } else {
+            setBossStatus('hidden');
             setEntityHP(entityMAXHP);
             setEntityCOUNT(entityCOUNT + 1);
         }
@@ -392,6 +401,7 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
     }
 
     const startOver = () => {
+        setBossStatus('hidden');
         setEntityName(Names[Math.random() * Names.length | 0] + " the " + Adjectives[Math.random() * Adjectives.length | 0] + " " + Enemies[(Math.random() * Enemies.length | 0)])
         setEntityMAXHP(Math.round(30 * Math.pow(1.2, currRestart  - 1)));
         setEntityHP(Math.round(30 * Math.pow(1.2, currRestart  - 1)));
@@ -460,7 +470,7 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
             />
             <Entity 
                 setEntityHP={{setEntityHP}}
-                entity={{name: entityName, drop: dropChance}}
+                entity={{name: entityName, drop: dropChance, boss: bossStatus}}
                 stats={{level: entityLevel, count: entityCOUNT, attack: entityATK, defense: entityDEF, hp: entityHP, maxHP: entityMAXHP}}
                 dropRates={{rarities: rarities, weight: totalWeight}}
             />

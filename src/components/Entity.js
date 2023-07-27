@@ -11,7 +11,7 @@ function Entity({setEntityHP, stats, entity, dropRates}) {
     return(
         <div id="Entity">
             <div className="panel">
-                {entity.name} [Level {stats.level}]
+                <i class={"fa-solid fa-crown " + entity.boss}></i> {" " + entity.name} [Level {stats.level}]
                 <div className="entity-count">{stats.count}/5 Enemies killed</div>
                 <div className="health-bar">
                     <div className="remaining-health-bar" style={{width: hp}}></div>
@@ -22,15 +22,15 @@ function Entity({setEntityHP, stats, entity, dropRates}) {
                     <div>Drop Chance: {entity.drop}%</div>
                 </div>
                 <div id="rarity-display">
-                    <div className='rarity-tab rarity-Common'>Common: <br></br>{percent('Common')}%</div>
-                    <div className='rarity-tab rarity-Uncommon'>Uncommon: <br></br>{percent('Uncommon')}%</div>
-                    <div className='rarity-tab rarity-Rare'>Rare: <br></br>{percent('Rare')}%</div>
-                    <div className='rarity-tab rarity-Epic'>Epic: <br></br>{percent('Epic')}%</div>
-                    <div className='rarity-tab rarity-Elite'>Elite: <br></br>{percent('Elite')}%</div>
-                    <div className='rarity-tab rarity-Legendary'>Legendary: <br></br>{percent('Legendary')}%</div>
-                    <div className='rarity-tab rarity-Mythic'>Mythic: <br></br>{percent('Mythic')}%</div>
-                    <div className='rarity-tab rarity-Exotic'>Exotic: <br></br>{percent('Exotic')}%</div>
-                    <div className='rarity-tab rarity-Ultimate'>Ultimate: <br></br>{percent('Ultimate')}%</div>
+                    <div className='rarity-tab Common'>Common: <br></br>{percent('Common')}%</div>
+                    <div className='rarity-tab Uncommon'>Uncommon: <br></br>{percent('Uncommon')}%</div>
+                    <div className='rarity-tab Rare'>Rare: <br></br>{percent('Rare')}%</div>
+                    <div className='rarity-tab Epic'>Epic: <br></br>{percent('Epic')}%</div>
+                    <div className='rarity-tab Elite'>Elite: <br></br>{percent('Elite')}%</div>
+                    <div className='rarity-tab Legendary'>Legendary: <br></br>{percent('Legendary')}%</div>
+                    <div className='rarity-tab Mythic'>Mythic: <br></br>{percent('Mythic')}%</div>
+                    <div className='rarity-tab Exotic'>Exotic: <br></br>{percent('Exotic')}%</div>
+                    <div className='rarity-tab Ultimate'>Ultimate: <br></br>{percent('Ultimate')}%</div>
                 </div>
             </div>
         </div>

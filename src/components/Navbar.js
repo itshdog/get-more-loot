@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import NavFooter from './NavFooter.js';
 import Coin from '../images/icons/48x48/coin_01d.png'
 
 function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, coins, setCoins, dropChance, updateChance}) {
@@ -89,7 +88,7 @@ function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, co
     }
 
     return(
-        <div className="Navbar">
+        /*<div className="Navbar">
             <div className='title'>Navbar</div>
             <div className="navbar-button" style={{marginTop: '20px'}} onClick={openUpgrade}>
                 Upgrades
@@ -186,7 +185,13 @@ function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, co
                 </div>
             </div>
         </div>
-            <NavFooter/>
+        </div>*/
+
+        <div className="Navbar">
+            <div className="nav-button selected">Storage<i class="fa-solid fa-list"></i></div>
+            <div className="nav-button">Upgrades<i class="fa-solid fa-circle-up"></i></div>
+            <div className="nav-button">Settings<i class="fa-solid fa-sliders"></i></div>
+            <div className="nav-button">Admin<i class="fa-solid fa-lock"></i></div>
         </div>
     )
 }

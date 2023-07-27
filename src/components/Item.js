@@ -46,11 +46,15 @@ function Item({equipItem, sellItem, drop, info, stats, affixes}) {
         return(
             <div className={'item ' + info.rarity}>
                 <div className='img-container'><img src={itemImage} alt={info.name}></img></div>
-                <div className='tooltip'>
-                    <div className='tooltip-title'>{info.name}<div>Level {drop.level}</div></div>
-                    <div className={'rarity-' + info.rarity}>{info.rarity} {info.type}<div style={{float: 'right'}}>ID: {info.id}</div></div>
-                    <div className={'tooltip-drop'}>{drop.enemy}</div>
-                    <div className='tooltip-stat'>{stats.base} {stats.type}</div>
+                <div className={'tooltip ' + info.rarity}>
+                    <div className={'tooltip-header ' + info.rarity}>
+                        <div className='tooltip-title'>{info.name}<div>Level {drop.level}</div></div>
+                        <div className='rarity'>{info.rarity} {info.type}<div style={{float: 'right'}}>ID: {info.id}</div></div>
+                    </div>
+                    <div className='tooltip-drop'>Dropped by <i class={"fa-solid fa-crown " + info.boss}></i> {drop.enemy}</div>
+                    <div className='tooltip-info'>
+                        <div className='tooltip-stat'>{stats.base} {stats.type}</div>
+                    </div>
                     <div className='tooltip-value'>Sell Value {stats.value}<img className="coin" src={images['coin_01d.png']} alt="Coins"></img></div>
                     <button onClick={() => equipItem(info.id, info.type)}>Equip</button><button onClick={() => sellItem(info.id)}>Sell</button>
                 </div>
@@ -60,12 +64,16 @@ function Item({equipItem, sellItem, drop, info, stats, affixes}) {
         return(
         <div className={'item ' + info.rarity}>
             <div className='img-container'><img src={itemImage} alt={info.name}></img></div>
-            <div className='tooltip'>
-                <div className='tooltip-title'>{info.name}<div>Level {drop.level}</div></div>
-                <div className={'rarity-' + info.rarity}>{info.rarity} {info.type}<div style={{float: 'right'}}>ID: {info.id}</div></div>
-                <div className={'tooltip-drop'}>{drop.enemy}</div>
-                <div className='tooltip-stat'>{stats.base} {stats.type}</div>
-                <div className='tooltip-stat-small'>+{affixes[0][1]}% {affixes[0][0]}</div>
+            <div className={'tooltip ' + info.rarity}>
+                <div className={'tooltip-header ' + info.rarity}>
+                    <div className='tooltip-title'>{info.name}<div>Level {drop.level}</div></div>
+                    <div className='rarity'>{info.rarity} {info.type}<div style={{float: 'right'}}>ID: {info.id}</div></div>
+                </div>
+                <div className='tooltip-drop'>Dropped by <i class={"fa-solid fa-crown " + info.boss}></i> {drop.enemy}</div>
+                <div className='tooltip-info'>
+                    <div className='tooltip-stat'>{stats.base} {stats.type}</div>
+                    <div className='tooltip-stat-small'>+{affixes[0][1]}% {affixes[0][0]}</div>
+                </div>
                 <div className='tooltip-value'>Sell Value {stats.value}<img className="coin" src={images['coin_01d.png']} alt="Coins"></img></div>
                 <button onClick={() => equipItem(info.id, info.type)}>Equip</button><button onClick={() => sellItem(info.id)}>Sell</button>
             </div>
@@ -75,13 +83,17 @@ function Item({equipItem, sellItem, drop, info, stats, affixes}) {
         return(
         <div className={'item ' + info.rarity}>
             <div className='img-container'><img src={itemImage} alt={info.name}></img></div>
-            <div className='tooltip'>
-                <div className='tooltip-title'>{info.name}<div>Level {drop.level}</div></div>
-                <div className={'rarity-' + info.rarity}>{info.rarity} {info.type}<div style={{float: 'right'}}>ID: {info.id}</div></div>
-                <div className={'tooltip-drop'}>{drop.enemy}</div>
-                <div className='tooltip-stat'>{stats.base} {stats.type}</div>
-                <div className='tooltip-stat-small'>+{affixes[0][1]}% {affixes[0][0]}</div>
-                <div className='tooltip-stat-small'>+{affixes[1][1]}% {affixes[1][0]}</div>
+            <div className={'tooltip ' + info.rarity}>
+                <div className={'tooltip-header ' + info.rarity}>
+                    <div className='tooltip-title'>{info.name}<div>Level {drop.level}</div></div>
+                    <div className='rarity'>{info.rarity} {info.type}<div style={{float: 'right'}}>ID: {info.id}</div></div>
+                </div>
+                <div className='tooltip-drop'>Dropped by <i class={"fa-solid fa-crown " + info.boss}></i> {drop.enemy}</div>
+                <div className='tooltip-info'>
+                    <div className='tooltip-stat'>{stats.base} {stats.type}</div>
+                    <div className='tooltip-stat-small'>+{affixes[0][1]}% {affixes[0][0]}</div>
+                    <div className='tooltip-stat-small'>+{affixes[1][1]}% {affixes[1][0]}</div>
+                </div>
                 <div className='tooltip-value'>Sell Value {stats.value}<img className="coin" src={images['coin_01d.png']} alt="Coins"></img></div>
                 <button onClick={() => equipItem(info.id, info.type)}>Equip</button><button onClick={() => sellItem(info.id)}>Sell</button>
             </div>
@@ -91,14 +103,18 @@ function Item({equipItem, sellItem, drop, info, stats, affixes}) {
         return(
         <div className={'item ' + info.rarity}>
             <div className='img-container'><img src={itemImage} alt={info.name}></img></div>
-            <div className='tooltip'>
-                <div className='tooltip-title'>{info.name}<div>Level {drop.level}</div></div>
-                <div className={'rarity-' + info.rarity}>{info.rarity} {info.type}<div style={{float: 'right'}}>ID: {info.id}</div></div>
-                <div className={'tooltip-drop'}>{drop.enemy}</div>
-                <div className='tooltip-stat'>{stats.base} {stats.type}</div>
-                <div className='tooltip-stat-small'>+{affixes[0][1]}% {affixes[0][0]}</div>
-                <div className='tooltip-stat-small'>+{affixes[1][1]}% {affixes[1][0]}</div>
-                <div className='tooltip-stat-small'>+{affixes[2][1]}% {affixes[2][0]}</div>
+            <div className={'tooltip ' + info.rarity}>
+                <div className={'tooltip-header ' + info.rarity}>
+                    <div className='tooltip-title'>{info.name}<div>Level {drop.level}</div></div>
+                    <div className='rarity'>{info.rarity} {info.type}<div style={{float: 'right'}}>ID: {info.id}</div></div>
+                </div>
+                <div className='tooltip-drop'>Dropped by <i class={"fa-solid fa-crown " + info.boss}></i> {drop.enemy}</div>
+                <div className='tooltip-info'>
+                    <div className='tooltip-stat'>{stats.base} {stats.type}</div>
+                    <div className='tooltip-stat-small'>+{affixes[0][1]}% {affixes[0][0]}</div>
+                    <div className='tooltip-stat-small'>+{affixes[1][1]}% {affixes[1][0]}</div>
+                    <div className='tooltip-stat-small'>+{affixes[2][1]}% {affixes[2][0]}</div>
+                </div>
                 <div className='tooltip-value'>Sell Value {stats.value}<img className="coin" src={images['coin_01d.png']} alt="Coins"></img></div>
                 <button onClick={() => equipItem(info.id, info.type)}>Equip</button><button onClick={() => sellItem(info.id)}>Sell</button>
             </div>
@@ -108,15 +124,19 @@ function Item({equipItem, sellItem, drop, info, stats, affixes}) {
         return(
         <div className={'item ' + info.rarity}>
             <div className='img-container'><img src={itemImage} alt={info.name}></img></div>
-            <div className='tooltip'>
-                <div className='tooltip-title'>{info.name}<div>Level {drop.level}</div></div>
-                <div className={'rarity-' + info.rarity}>{info.rarity} {info.type}<div style={{float: 'right'}}>ID: {info.id}</div></div>
-                <div className={'tooltip-drop'}>{drop.enemy}</div>
-                <div className='tooltip-stat'>{stats.base} {stats.type}</div>
-                <div className='tooltip-stat-small'>+{affixes[0][1]}% {affixes[0][0]}</div>
-                <div className='tooltip-stat-small'>+{affixes[1][1]}% {affixes[1][0]}</div>
-                <div className='tooltip-stat-small'>+{affixes[2][1]}% {affixes[2][0]}</div>
-                <div className='tooltip-stat-small'>+{affixes[3][1]}% {affixes[3][0]}</div>
+            <div className={'tooltip ' + info.rarity}>
+                <div className={'tooltip-header ' + info.rarity}>
+                    <div className='tooltip-title'>{info.name}<div>Level {drop.level}</div></div>
+                    <div className='rarity'>{info.rarity} {info.type}<div style={{float: 'right'}}>ID: {info.id}</div></div>
+                </div>
+                <div className='tooltip-drop'>Dropped by <i class={"fa-solid fa-crown " + info.boss}></i> {drop.enemy}</div>
+                <div className='tooltip-info'>
+                    <div className='tooltip-stat'>{stats.base} {stats.type}</div>
+                    <div className='tooltip-stat-small'>+{affixes[0][1]}% {affixes[0][0]}</div>
+                    <div className='tooltip-stat-small'>+{affixes[1][1]}% {affixes[1][0]}</div>
+                    <div className='tooltip-stat-small'>+{affixes[2][1]}% {affixes[2][0]}</div>
+                    <div className='tooltip-stat-small'>+{affixes[3][1]}% {affixes[3][0]}</div>
+                </div>
                 <div className='tooltip-value'>Sell Value {stats.value}<img className="coin" src={images['coin_01d.png']} alt="Coins"></img></div>
                 <button onClick={() => equipItem(info.id, info.type)}>Equip</button><button onClick={() => sellItem(info.id)}>Sell</button>
             </div>
