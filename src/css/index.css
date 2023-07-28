@@ -54,7 +54,9 @@ code {
 .Navbar {
   background-color: rgba(53,53,53);
   display: inline-block;
-  height: 85%;
+  min-height: 650px;
+  height: 80vh;
+  max-height: 900px;
   border-radius: 0.5em 0 0 0.5em;
   position: relative;
   color: white!important;
@@ -85,7 +87,12 @@ code {
 }
 
 .Tab {
-  width: 475px;
+  position: absolute;
+  left: 62px;
+  min-height: 650px;
+  height: 80vh;
+  max-height: 900px;
+  width: 470px;
   background: rgb(53, 53, 53);
   z-index: 99;
   position: absolute!important;
@@ -112,9 +119,10 @@ code {
 .stat-row {
   color: rgb(192, 192, 192);
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 2px;
-  margin: 3px;
+  padding: 3px 15px;
+  margin: 2px;
+  width: fit-content;
+  display: inline-block;
 }
 
 .stat-row:hover {
@@ -170,6 +178,8 @@ code {
   color: white;
   font-size: 26px;
   font-weight: 700;
+  height: 50px;
+  padding: 10px;
 }
 
 .admin-buttons {
@@ -190,7 +200,9 @@ code {
 }
 
 #Inventory {
-  height: 85%;
+  min-height: 650px;
+  height: 80vh;
+  max-height: 900px;
   width: 475px;
   background-color: rgba(53,53,53);
   border-radius: 0 0.5em 0.5em 0;
@@ -244,6 +256,7 @@ code {
     display: inline-block;
     margin: 0 auto;
     height: 90%;
+    min-height: 0!important;
     width: 95vw;
     border-radius: 0.5em 0.5em 0 0;
   }
@@ -267,7 +280,8 @@ code {
     display: inline-block;
     width: 95vw;
     margin: 0 auto;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     margin-bottom: 100px;
     border-radius: 0 0 0.5em 0.5em;
   }

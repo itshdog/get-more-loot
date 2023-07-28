@@ -19,35 +19,23 @@ function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, co
     }
 
     const openUpgrade = () => {
-        if (upgrade === 'none') {
-            setSelected(['', 'selected', '', '', '']);
-            setUpgrade('block');
-            setStats('none');
-            setSettings('none');
-        } else if (upgrade === 'block') {
-            setUpgrade('none');
-        }
+        setSelected(['', 'selected', '', '', '']);
+        setUpgrade('block');
+        setStats('none');
+        setSettings('none');
     }
 
     const openStats = () => {
-        if (stats === 'none') {
-            setSelected(['', '', 'selected', '', '']);
-            setStats('block');
-            setUpgrade('none');
-            setSettings('none');
-        } else if (stats === 'block') {
-            setStats('none');
-        }
+        setSelected(['', '', 'selected', '', '']);
+        setStats('block');
+        setUpgrade('none');
+        setSettings('none');
     }
     const openSettings = () => {
-        if (settings === 'none') {
-            setSelected(['', '', '', 'selected', '']);
-            setSettings('block');
-            setUpgrade('none');
-        } else if (settings === 'block') {
-            setSettings('none');
-            setSettings('none');
-        }
+        setSelected(['', '', '', 'selected', '']);
+        setSettings('block');
+        setUpgrade('none');
+        setStats('none');
     }
 
     const [invalid1, setInvalid1] = useState(false);
@@ -114,9 +102,8 @@ function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, co
             <div className={"nav-button " + selected[4]} onClick={openAdmin}>Admin<i class="fa-solid fa-lock"></i></div>
 
             <div className="Tab" style={{display: upgrade}}>
-            <button className='back' onClick={openUpgrade}>Back</button>
             <div className='title'>Upgrades</div>
-            <div className={invalid1 ? 'navbar-button invalid' : 'navbar-button'} onClick={() => luckyDay(luckyDayCost)} style={{marginTop: '20px'}}>
+            <div className={invalid1 ? 'navbar-button invalid' : 'navbar-button'} onClick={() => luckyDay(luckyDayCost)}>
                 <div className="upgrade-title">Lucky Day</div>
                 <div className="upgrade-stats">
                     Increase drop chance by 1%
@@ -176,10 +163,36 @@ function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, co
                     <div className="upgrade-cost">20,000<img className="coin-count" src={Coin}></img></div>
                 </div>
             </div>
+            <div className={invalid4 ? 'navbar-button invalid' : 'navbar-button'} onClick={() => placeholderUpgrade4(20000)}>
+                <div className="upgrade-title">Robot Helper</div>
+                <div className="upgrade-stats">
+                    Automatically 'Start Over' when dead
+                </div>
+                <div className="upgrade-info">
+                    <div className="upgrade-cost">1,000,000<img className="coin-count" src={Coin}></img></div>
+                </div>
+            </div>
+            <div className={invalid4 ? 'navbar-button invalid' : 'navbar-button'} onClick={() => placeholderUpgrade4(20000)}>
+                <div className="upgrade-title">Larger Pockets</div>
+                <div className="upgrade-stats">
+                    Purchase 1 extra inventory slot
+                </div>
+                <div className="upgrade-info">
+                    <div className="upgrade-cost">50,000<img className="coin-count" src={Coin}></img></div>
+                </div>
+            </div>
+            <div className={invalid4 ? 'navbar-button invalid' : 'navbar-button'} onClick={() => placeholderUpgrade4(20000)}>
+                <div className="upgrade-title">Anotha one</div>
+                <div className="upgrade-stats">
+                    Purchase 1 extra inventory tab. Doesn't include slots
+                </div>
+                <div className="upgrade-info">
+                    <div className="upgrade-cost">250,000<img className="coin-count" src={Coin}></img></div>
+                </div>
+            </div>
         </div>
 
         <div className="Tab" style={{display: stats}}>
-            <button className='back' onClick={openStats}>Back</button>
             <div className='title'>Statistics</div>
             <div className='stat-row'>Enemies Killed: {statInfo['enemies_killed']}</div>
             <div className='stat-row'>Items Dropped: {statInfo['items_dropped']}</div>
@@ -187,7 +200,6 @@ function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, co
         </div>
 
         <div className="Tab" style={{display: settings}}>
-            <button className='back' onClick={openSettings}>Back</button>
             <div className='title'>Settings</div>
         </div>
         </div>
