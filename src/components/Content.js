@@ -478,11 +478,11 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
                 { RP ? 
                     <div>
                     <div>Level {currRestart}</div>
-                    <button onClick={decRestart}>Less</button>
+                    <button onClick={decRestart}><i class="fa-solid fa-left-long"></i></button>
                     <button id="restart-button" onClick={() => startOver(currRestart)}>
                         Start Over
                     </button>
-                    <button onClick={incRestart}>More</button>
+                    <button onClick={incRestart}><i class="fa-solid fa-right-long"></i></button>
                     </div> 
                     :
                     <button id="restart-button" onClick={() => startOver(currRestart)}>

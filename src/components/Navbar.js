@@ -97,7 +97,7 @@ function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, co
         <div className="Navbar">
             <div className={"nav-button " + selected[0]} onClick={openStorage}>Storage<i class="fa-solid fa-list"></i></div>
             <div className={"nav-button " + selected[1]} onClick={openUpgrade}>Upgrades<i class="fa-solid fa-circle-up"></i></div>
-            <div className={"nav-button " + selected[2]} onClick={openStats}>Statistics<i class="fa-solid fa-circle-up"></i></div>
+            <div className={"nav-button " + selected[2]} onClick={openStats}>Statistics<i class="fa-solid fa-arrow-trend-up"></i></div>
             <div className={"nav-button " + selected[3]} onClick={openSettings}>Settings<i class="fa-solid fa-sliders"></i></div>
             <div className={"nav-button " + selected[4]} onClick={openAdmin}>Admin<i class="fa-solid fa-lock"></i></div>
 
@@ -197,6 +197,10 @@ function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, co
             <div className='stat-row'>Enemies Killed: {statInfo['enemies_killed']}</div>
             <div className='stat-row'>Items Dropped: {statInfo['items_dropped']}</div>
             <div className='stat-row'>Average Drop Percentage: {(parseFloat(statInfo['items_dropped'] / statInfo['enemies_killed'] * 100).toFixed(2))}%</div>
+            <div className='stat-row'>Enemies Killed: ---</div>
+            <div className='stat-row'>Times died: ---</div>
+            <div className='stat-row'>Total XP received: ---</div>
+            <div className='stat-row'>Total Coins received: ---</div>
         </div>
 
         <div className="Tab" style={{display: settings}}>
