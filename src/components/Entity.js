@@ -11,13 +11,14 @@ function Entity({setEntityHP, stats, entity, dropRates}) {
     return(
         <div id="Entity">
             <div className="panel">
-                <i class={"fa-solid fa-crown " + entity.boss}></i> {" " + entity.name} [Level {stats.level}]
-                <div className="entity-count">{stats.count}/5 Enemies killed</div>
+                <div id="entity-name"><i class={"fa-solid fa-crown " + entity.boss}></i> {" " + entity.name}</div>
+                <div id="entity-level">[Level {stats.level}]</div>
                 <div className="health-bar">
                     <div className="remaining-health-bar" style={{width: hp}}></div>
                     <div className="total-health-bar">{stats.hp}/{stats.maxHP}</div>
                 </div>
                 <div className="stats">
+                    <div className="entity-count">{stats.count}/5 Enemies killed</div>
                     <div className="center">Attack: {stats.attack} | Defense: {stats.defense}</div>
                     <div>Drop Chance: {entity.drop}%</div>
                 </div>

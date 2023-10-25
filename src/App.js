@@ -29,6 +29,13 @@ function App() {
     setInventory(inv);
   }, [setInventory])
 
+  const [isAction, setAction] = useState("Equip");
+  const actionRef = useRef("Equip");
+  const updateAction = useCallback(action => {
+    actionRef.current = action
+    setAction(action);
+  }, [setAction])
+
   /* Drop Chance */
   const [dropChance, setDropChance] = useState(30);
   const chanceRef = useRef();
@@ -171,6 +178,8 @@ function App() {
           dropChance={dropChance}
           sellItem={sellItem}
           equipItem={equipItem}
+          isAction={actionRef}
+          setAction={updateAction}
         />
         <div className="wrapper">
         <Navbar 
@@ -194,6 +203,8 @@ function App() {
           setEquipment={updateEquipment}
           inventory={inventory} 
           setInventory={updateInventory}
+          isAction={isAction}
+          setAction={updateAction}
         />
         </div>
     </div>

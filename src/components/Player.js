@@ -10,7 +10,8 @@ function Player({stats, equip, base}) {
     return(
         <div id="Player">
             <div className="panel">
-                Player [Level {stats.level}]
+                <input type="text" placeholder="Player" id="username"></input>
+                <div id="player-level">[Level {stats.level}]</div>
                 <div className="player-coins">{stats.coins.toLocaleString()}<img className="coin-count" src={Coin} alt="Coins"></img></div>
                 <div className="health-xp">
                     <div className="xp-bar">

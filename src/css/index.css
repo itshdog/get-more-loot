@@ -210,6 +210,33 @@ code {
   flex-flow: column;
 }
 
+#inventory-holder {
+  position: relative;
+}
+
+#action-buttons {
+  font-size: 14px;
+  font-weight: 500!important;
+}
+
+.action {
+  background-color: rgba(255,255,255,0.15);
+  width: 50px;
+  border-radius: 5px;
+  padding: 3px 9px;
+  margin: 0 5px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.active-equip {
+  background-color: rgb(45, 194, 45);
+}
+
+.active-sell {
+  background-color: rgb(177, 22, 22)
+}
+
 @media (max-width: 1400px) {
   #Admin {
     height: 100%;
@@ -339,6 +366,7 @@ code {
   column-gap: 20px;
   row-gap: 5px;
   justify-items: center;
+  padding: 0 15px;
 }
 
 #Inventory #Equipment {
@@ -349,8 +377,8 @@ code {
   background-color: rgba(255, 255, 255, 0.15)!important;
   border-radius: 0.5em;
   height: 100%;
-  min-height: 111px;
-  width: 110px;
+  min-height: 101px;
+  width: 100%;
 }
 
 #storage-container {
@@ -396,7 +424,7 @@ code {
 .equip-box .item {
   border-radius: 0.5em;
   margin: 5px;
-  height: 80px;
+  height: 70px;
 }
 
 .equip-box .item .img-container {
@@ -636,6 +664,40 @@ code {
   border-radius: 0.5em;
   padding: 1px;
   position: relative;
+}
+
+#username {
+  background: none;
+  color: white;
+  border: none;
+  text-decoration: none;
+  text-align: center;
+  font-size: 18px;
+  margin-top: 5px;
+
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+#username:hover {
+  background-color: rgba(255,255,255,.05);
+  border-radius: 5px;
+  transition: 0.25s;
+}
+
+::placeholder {
+  color: rgb(190, 190, 190);
+  opacity: .75;
+}
+
+#entity-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: rgb(202, 202, 202);
+}
+
+#entity-level {
+  margin-bottom: 4px;
 }
 
 .player-coins {

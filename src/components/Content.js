@@ -4,7 +4,7 @@ import Item from './Item.js';
 import React, { useState, useEffect } from 'react';
 import logo from '../images/logo.png'
 
-function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, stats, setStats, coins, setCoins, dropChance, sellItem, equipItem}) {
+function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, stats, setStats, coins, setCoins, dropChance, sellItem, equipItem, isAction, setAction}) {
 
     /* Attack */
     const [baseATK, setBaseATK] = useState(5);
@@ -296,6 +296,8 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
                     info={{name: itemName, id: id, rarity: itemRarity, type: itemType, boss: bossStatus}}
                     stats={{base: (Math.round(statBase * Math.pow(1.2, entityLevel - 1))), type: statType, value: (Math.round(value * Math.pow(1.2, entityLevel - 1)))}}
                     affixes={affixes}
+                    action={isAction}
+                    setAction={setAction}
                 />];
             console.log("New item: " + itemName + " " + id);
             setInventory(newLoot);
@@ -305,19 +307,24 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
         }
     }
 
+    const calcHP = (level, bossScale = 1) => {
+        let base = 30
+        let scale = 1.2
+        return Math.round(base + (((base * Math.pow(scale, level)) - base) * bossScale));
+    }
+
     const spawnEntity = () => {
         /* Set HP and random name */
         setEntityName(Names[Math.random() * Names.length | 0] + " the " + Adjectives[Math.random() * Adjectives.length | 0] + " " + Enemies[(Math.random() * Enemies.length | 0)])
         /* Level up after 5 enemies killed*/
         if (entityCOUNT >= 4) {
             /* SPAWN BOSS */
-            let bossHP = Math.round(entityMAXHP * 4);
             let bossATK = Math.round(entityATK * 2);
             let bossDEF = Math.round(entityDEF * 2);
             if (entityLevel%5 === 4) {
                 setBossStatus('show');
-                setEntityMAXHP(bossHP);
-                setEntityHP(bossHP);
+                setEntityMAXHP(calcHP(entityLevel, 4));
+                setEntityHP(calcHP(entityLevel, 4));
                 setEntityATK(bossATK);
                 setEntityDEF(bossDEF);
                 setEntityCOUNT(5);
@@ -328,21 +335,19 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
                 setBossStatus('hidden');
                 if (entityLevel%5 === 0) { 
                     console.log("Restore from boss");
-                    let HP = Math.round((bossHP / 4) * 1.2)
                     let ATK = Math.round(Math.round((bossATK / 2) * 1.25))
                     let DEF = Math.round(Math.round((bossDEF / 2) * 1.25))
-                    setEntityMAXHP(Math.ceil(HP/4));
-                    setEntityHP(Math.ceil(HP/4));
+                    setEntityMAXHP(calcHP(entityLevel));
+                    setEntityHP(calcHP(entityLevel));
                     setEntityDEF(Math.ceil(DEF/2));
                     setEntityATK(Math.ceil(ATK/2));
                     setEntityCOUNT(0);
                 } else {
                     console.log("Spawn regular enemy");
-                    let HP = Math.round(entityMAXHP * 1.2)
                     let ATK = Math.max((entityATK + 2), Math.round(entityATK * (1.25)))
                     let DEF = Math.max((entityDEF + 2), Math.round(entityDEF * (1.25)))
-                    setEntityMAXHP(HP);
-                    setEntityHP(HP);
+                    setEntityMAXHP(calcHP(entityLevel));
+                    setEntityHP(calcHP(entityLevel));
                     setEntityDEF(DEF);
                     setEntityATK(ATK);
                     setEntityCOUNT(0);
