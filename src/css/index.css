@@ -47,9 +47,14 @@ code {
 }
 
 .wrapper {
+  position: relative;
   display: flex;
-  align-items: center;
+  background: rgba(53,53,53);
+  margin: 50px 0;
+  border-radius: 10px;
+  height: fit-content;
 }
+
 
 .Navbar {
   background-color: rgba(53,53,53);
@@ -58,7 +63,6 @@ code {
   height: 80vh;
   max-height: 900px;
   border-radius: 0.5em 0 0 0.5em;
-  position: relative;
   color: white!important;
 }
 
@@ -89,10 +93,8 @@ code {
 .Tab {
   position: absolute;
   left: 62px;
-  min-height: 650px;
-  height: 80vh;
-  max-height: 900px;
-  width: 470px;
+  height: 100%;
+  width: calc(100% - 62px);
   background: rgb(53, 53, 53);
   z-index: 99;
   position: absolute!important;
@@ -164,8 +166,6 @@ code {
 
 .Navbar .Tab {
   position: absolute;
-  left: 62px;
-  height: calc(100% - 16px);
 }
 
 #Content {
@@ -200,10 +200,7 @@ code {
 }
 
 #Inventory {
-  min-height: 650px;
-  height: 80vh;
-  max-height: 900px;
-  width: 475px;
+  width: 100%;
   background-color: rgba(53,53,53);
   border-radius: 0 0.5em 0.5em 0;
   display: inline-block;
@@ -275,8 +272,8 @@ code {
     z-index: 9999;
     left: 0!important;
     top: 67px!important;
-    height: 99vh!important;
-    width: calc(95vw - 4px)!important;
+    width: 100%;
+    height: calc(100% - 67px);
   }
   .Navbar {
     float: none;
@@ -284,7 +281,6 @@ code {
     margin: 0 auto;
     height: 90%;
     min-height: 0!important;
-    width: 95vw;
     border-radius: 0.5em 0.5em 0 0;
   }
   .nav-button {
@@ -296,6 +292,10 @@ code {
   .equip-box {
     position: static!important;
   }
+  .wrapper {
+    width: 90%;
+    margin: 20px auto;
+  }
   #Equipment {
     position: relative;
     margin: 0 5px!important;
@@ -305,11 +305,8 @@ code {
   }
   #Inventory {
     display: inline-block;
-    width: 95vw;
     margin: 0 auto;
     height: 100%;
-    min-height: 100vh;
-    margin-bottom: 100px;
     border-radius: 0 0 0.5em 0.5em;
   }
   #Content {

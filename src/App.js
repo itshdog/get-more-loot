@@ -182,30 +182,30 @@ function App() {
           setAction={updateAction}
         />
         <div className="wrapper">
-        <Navbar 
-          RP={RP}
-          setRP={setRP}
-          Admin={admin}
-          setAdmin={updateAdmin}
-          statInfo={stats}
-          itemScan={itemScan}
-          setItemScan={setItemScan}
-          coins={coins}
-          setCoins={updateCoins}
-          dropChance={dropChance}
-          updateChance={updateChance}
-        />
-        <Inventory 
-          itemScan={itemScan}
-          setItemScan={setItemScan}
-          equipRef={equipRef}
-          equipment={equipment}
-          setEquipment={updateEquipment}
-          inventory={inventory} 
-          setInventory={updateInventory}
-          isAction={isAction}
-          setAction={updateAction}
-        />
+          <Navbar 
+            RP={RP}
+            setRP={setRP}
+            Admin={admin}
+            setAdmin={updateAdmin}
+            statInfo={stats}
+            itemScan={itemScan}
+            setItemScan={setItemScan}
+            coins={coins}
+            setCoins={updateCoins}
+            dropChance={dropChance}
+            updateChance={updateChance}
+          />
+          <Inventory 
+            itemScan={itemScan}
+            setItemScan={setItemScan}
+            equipRef={equipRef}
+            equipment={equipment}
+            setEquipment={updateEquipment}
+            inventory={inventory} 
+            setInventory={updateInventory}
+            isAction={isAction}
+            setAction={updateAction}
+          />
         </div>
     </div>
   );
