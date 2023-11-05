@@ -14,7 +14,14 @@ function App() {
   }, [setAdmin])
 
   /* Statistics */
-  const [stats, setStats] = useState({"enemies_killed": 0, "items_dropped": 0});
+  const [stats, setStats] = useState(
+    {"enemies_killed": 0, 
+    "items_dropped": 0, 
+    "times_died" : 0,
+    "started_over": 0, 
+    "total_xp": 0,
+    "total_coins": 0}
+  );
   const statRef = useRef();
   const updateStats = useCallback(stat => {
     statRef.current = stat
@@ -86,6 +93,10 @@ function App() {
         removedInv.push(invRef.current[i]);
       } else {
         updateCoins(coinRef.current + invRef.current[i].props.stats.value);
+
+        let newStats = stats
+        newStats['total_coins'] = (newStats['total_coins'] || 0) + invRef.current[i].props.stats.value
+        setStats(newStats);
       }
     }
     updateInventory(removedInv)
@@ -170,6 +181,7 @@ function App() {
           equipment={equipment}
           setEquipment={updateEquipment}
           Admin={admin}
+          setAdmin={updateAdmin}
           RP={RP}
           stats={stats}
           setStats={updateStats}
@@ -185,8 +197,6 @@ function App() {
           <Navbar 
             RP={RP}
             setRP={setRP}
-            Admin={admin}
-            setAdmin={updateAdmin}
             statInfo={stats}
             itemScan={itemScan}
             setItemScan={setItemScan}

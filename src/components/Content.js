@@ -4,7 +4,7 @@ import Item from './Item.js';
 import React, { useState, useEffect } from 'react';
 import logo from '../images/logo.png'
 
-function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, stats, setStats, coins, setCoins, dropChance, sellItem, equipItem, isAction, setAction}) {
+function Content({inventory, setInventory, equipment, setEquipment, Admin, setAdmin, RP, stats, setStats, coins, setCoins, dropChance, sellItem, equipItem, isAction, setAction}) {
 
     /* Attack */
     const [baseATK, setBaseATK] = useState(5);
@@ -54,12 +54,19 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
     /* In-game ticks */
     useEffect(() =>{
         const interval = setInterval(() => {
+            /* Player stays dead */
+            if (playerHP == 0) {
+                return
+            }
             /* Player dies */
-            if (playerHP <= 0 + entityATK - playerDEF || playerHP === 0) {
+            if (playerHP <= 0 + entityATK - playerDEF) {
+                let newStats = stats
+                newStats['times_died'] = (newStats['times_died'] || 0) + 1
+                setStats(newStats);
                 setPlayerHP(0);
                 return
             /* Entity dies */
-            } else if (entityHP <= 0 + playerATK) {
+            } else if (entityHP <= 0 + playerATK - entityDEF) {
                 giveDrops();
                 giveLoot();
                 let newStats = stats
@@ -366,9 +373,15 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
         /* Random 0-6 xp + 1.18^level * 3 */
         /* Example: 5 random XP + 1.18^level 10 * 3 = 20xp for a level 10 enemy */
         let xp = Math.floor((Math.random() * 6) + (3 * Math.pow(1.18, entityLevel - 1)));
+        let newStats = stats
+        newStats['total_xp'] = (newStats['total_xp'] || 0) + xp
+        setStats(newStats);
         /* Random 0-4 coins + 1.18^level * 2 */
         /* Example: 2 random coins + 1.18^level 10 * 2 = 12 coins for a level 10 enemy */
         let coinDrop = Math.floor((Math.random() * 4) + (2 * Math.pow(1.18, entityLevel - 1)));
+        newStats = stats
+        newStats['total_coins'] = (newStats['total_coins'] || 0) + coinDrop
+        setStats(newStats);
         setCoins(coins + coinDrop);
         /* Level up */
         if (playerXP + xp > playerMAXXP) {
@@ -406,6 +419,10 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
     }
 
     const startOver = () => {
+        let newStats = stats
+        newStats['started_over'] = (newStats['started_over'] || 0) + 1
+        setStats(newStats);
+
         setBossStatus('hidden');
         setEntityName(Names[Math.random() * Names.length | 0] + " the " + Adjectives[Math.random() * Adjectives.length | 0] + " " + Enemies[(Math.random() * Enemies.length | 0)])
         setEntityMAXHP(Math.round(30 * Math.pow(1.2, currRestart  - 1)));
@@ -454,6 +471,9 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
     }
     const killPlayer = () => {
         setPlayerHP(0);
+        let newStats = stats
+        newStats['times_died'] = (newStats['times_died'] || 0) + 1
+        setStats(newStats);
     }
     const killEnemy = () => {
         setEntityHP(0);
@@ -472,6 +492,7 @@ function Content({inventory, setInventory, equipment, setEquipment, Admin, RP, s
                 equip={{attack: playerATK - baseATK, defense: playerDEF - baseDEF, critChance: equipCritChance, critDamage: equipCritDamage}}
                 base={{attack: baseATK, defense: baseDEF, critChance: baseCritChance, critDamage: baseCritDamage}}
                 dropRates={{rarities: rarities, weight: totalWeight}}
+                admin={{admin: Admin, setAdmin: setAdmin}}
             />
             <Entity 
                 setEntityHP={{setEntityHP}}

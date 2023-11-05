@@ -178,7 +178,6 @@ code {
   color: white;
   font-size: 26px;
   font-weight: 700;
-  height: 50px;
   padding: 10px;
 }
 
@@ -224,6 +223,10 @@ code {
   margin: 0 5px;
   display: inline-block;
   cursor: pointer;
+}
+
+#clear {
+  width: 25px!important;
 }
 
 .active-equip {
@@ -479,7 +482,8 @@ code {
   padding: 0;
   padding: 5px;
   font-weight: 700;
-  color: rgba(238, 238, 238, 0.877)!important;
+  color: rgba(0, 0, 0, 0.5)!important;
+  text-shadow: rgba(0, 0, 0, 0.452) 1px 1px 5px;
 }
 
 .tooltip-info {
@@ -490,19 +494,11 @@ code {
   display: none;
 }
 
-.equip-box .tooltip .tooltip-value {
-  margin-top: 0;
-}
-
 .tooltip-stat  {
   font-size: 16px;
 }
 
 .equip-box:hover .tooltip {
-  display: block;
-}
-
-.tooltip:hover {
   display: block;
 }
 
@@ -523,16 +519,23 @@ code {
   background-color: rgb(63, 187, 63);
 }
 
+.tooltip .Uncommon {
+  border: rgb(54, 160, 54) 3px solid!important;
+}
+
 .rarity-Rare {
   color: rgb(75, 75, 207)!important;
 }
 
 .Rare {
-  background-color: rgb(75, 75, 207)
+  background-color: rgb(75, 75, 207);
+}
+
+.Rare .tooltip {
+  border: rgb(63, 63, 173) 3px solid!important;
 }
 
 .rarity-Epic {
-  font-size: 700;
   color: rgb(199, 89, 226)!important;
 }
 
@@ -540,6 +543,9 @@ code {
   background-color: rgb(199, 89, 226)
 }
 
+.Epic .tooltip {
+  border: rgb(164, 74, 187) 3px solid!important;
+}
 
 .rarity-Elite {
   color: rgb(124, 16, 224)!important;
@@ -547,6 +553,10 @@ code {
 
 .Elite {
   background-color: rgb(124, 16, 224)
+}
+
+.Elite .tooltip {
+  border: rgb(96, 12, 173) 3px solid!important;
 }
 
 .rarity-Legendary {
@@ -557,12 +567,22 @@ code {
   background-color: rgb(252, 151, 68)
 }
 
+.Legendary .tooltip {
+  border: rgb(207, 124, 55) 3px solid!important;
+  background-color: rgb(82, 48, 21)
+}
+
 .rarity-Mythic {
   color: rgb(248, 232, 86)!important;
 }
 
 .Mythic {
-  background-color: rgb(248, 232, 86)
+  background-color: rgb(216, 202, 75)
+}
+
+.Mythic .tooltip {
+  border: rgb(212, 199, 74) 3px solid!important;
+  background-color: rgb(97, 90, 26)
 }
 
 .rarity-Exotic {
@@ -583,14 +603,15 @@ code {
 
 .tooltip .tooltip-title {
   text-align: left;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 700;
-  color: white
+  letter-spacing: 1px;
+  color: white;
 }
 
 .tooltip-title div {
-  float: right;
   font-size: 12px;
+  font-weight: 500;
 }
 
 .tooltip button {
@@ -600,9 +621,12 @@ code {
 }
 
 .tooltip-value {
-  margin-top: 10px;
+  margin: 5px;
+  padding-bottom: 5px;
   font-size: 12px;
   text-align: center;
+  background-color: rgba(255,255,255,0.05);
+  border-radius: 5px;
 }
 
 .tooltip-drop {
@@ -748,15 +772,63 @@ code {
 }
 
 /* SETTINGS NAVBAR */
+.settings-tab {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  margin: 1px 5px;
+  padding: 5px;
+  width: calc(100% - 20px);
+  display: inline-block;
+  font-size: 20px;
+}
+
 .settings-title {
-  text-align: left;
+  float: left;
   padding-left: 10px;
+}
+
+.settings-content {
+  float: right;
+  position: relative;
+  width: 50%;
 }
 
 .settings-info {
   font-size: 10px;
   text-align: left;
   padding-left: 10px;
+}
+
+.dropbtn {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.dropbtn-content {
+  display: none;
+  position: absolute;
+  background-color:rgba(100,100,100);
+  width: 100%;
+  z-index: 1;
+}
+
+.dropbtn-content div {
+  cursor: pointer;
+}
+
+.dropbtn-content div:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.settings-content:hover .dropbtn-content {
+  display: block;
+  border-radius: 0 0 5px 5px;
+}
+
+.settings-content:hover .dropbtn {
+  border-radius: 5px 5px 0 0;
 }
 
 

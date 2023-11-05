@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Coin from '../images/icons/48x48/coin_01d.png'
 
-function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, coins, setCoins, dropChance, updateChance}) {
+function Navbar({RP, setRP, statInfo, itemScan, setItemScan, coins, setCoins, dropChance, updateChance}) {
 
     const [upgrade, setUpgrade] = useState('none');
     const [stats, setStats] = useState('none');
     const [settings, setSettings] = useState('none');
 
     const [selected, setSelected] = useState(['selected', '', '', '', '']);
-
-    const openAdmin = () => { (Admin === false) ? setAdmin(true) : setAdmin(false) }
 
     const openStorage = () => {
         setSelected(['selected', '', '', '', '']);
@@ -99,7 +97,6 @@ function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, co
             <div className={"nav-button " + selected[1]} onClick={openUpgrade}>Upgrades<i class="fa-solid fa-circle-up"></i></div>
             <div className={"nav-button " + selected[2]} onClick={openStats}>Statistics<i class="fa-solid fa-arrow-trend-up"></i></div>
             <div className={"nav-button " + selected[3]} onClick={openSettings}>Settings<i class="fa-solid fa-sliders"></i></div>
-            <div className={"nav-button " + selected[4]} onClick={openAdmin}>Admin<i class="fa-solid fa-lock"></i></div>
 
             <div className="Tab" style={{display: upgrade}}>
             <div className='title'>Upgrades</div>
@@ -197,14 +194,28 @@ function Navbar({RP, setRP, Admin, setAdmin, statInfo, itemScan, setItemScan, co
             <div className='stat-row'>Enemies Killed: {statInfo['enemies_killed']}</div>
             <div className='stat-row'>Items Dropped: {statInfo['items_dropped']}</div>
             <div className='stat-row'>Average Drop Percentage: {(parseFloat(statInfo['items_dropped'] / statInfo['enemies_killed'] * 100).toFixed(2))}%</div>
-            <div className='stat-row'>Enemies Killed: ---</div>
-            <div className='stat-row'>Times died: ---</div>
-            <div className='stat-row'>Total XP received: ---</div>
-            <div className='stat-row'>Total Coins received: ---</div>
+            <div className='stat-row'>Times died: {statInfo['times_died']}</div>
+            <div className='stat-row'>Times started over: {statInfo['started_over']}</div>
+            <div className='stat-row'>Total XP received: {statInfo['total_xp']}</div>
+            <div className='stat-row'>Total Coins received: {statInfo['total_coins']}</div>
         </div>
 
         <div className="Tab" style={{display: settings}}>
             <div className='title'>Settings</div>
+            <div className="settings-tab">
+                <div className="settings-title">Theme</div>
+                <div className="settings-content">
+                    <div className="dropbtn">Theme</div>
+                    <div className="dropbtn-content">
+                        <div>Light</div>
+                        <div>Dark</div>
+                    </div>
+                </div>
+            </div>
+            <div className="settings-tab">
+                <div className="settings-title">Setting 2</div>
+                <div className="settings-content">Mode 2</div>
+            </div>
         </div>
         </div>
 

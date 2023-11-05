@@ -4,17 +4,21 @@ import LoadInventory from './LoadInventory.js';
 
 function Inventory({itemScan, setItemScan, equipRef, equipment, inventory, isAction, setAction}) {
 
-    const [actionBool, setActionBool] = useState(true);
     const inventoryAction = (clicked) => {
         if (clicked === "Equip") {
             setAction("Equip");
-            setActionBool(true);
-            console.log("set equip");
+            document.getElementById("equip").className = "action active-equip";
+            document.getElementById("sell").className = "action";
         }
         else if (clicked === "Sell") {
             setAction("Sell");
-            setActionBool(false);
-            console.log("set sell");
+            document.getElementById("sell").className = "action active-sell";
+            document.getElementById("equip").className = "action";
+        } 
+        else if (clicked === "Clear") {
+            setAction(null);
+            document.getElementById("sell").className = "action";
+            document.getElementById("equip").className = "action";
         }
     }
     
@@ -32,10 +36,11 @@ function Inventory({itemScan, setItemScan, equipRef, equipment, inventory, isAct
                 <div id="inventory-holder" className="title">
                     <div id="inventory-label">Inventory</div>
                     <div id='action-buttons'>
-                        <div id='equip' className={actionBool ? "action active-equip" : "action"} onClick={() => inventoryAction("Equip")}>
+                        <div id="clear" className="action" onClick={() => inventoryAction("Clear")}>X</div>
+                        <div id='equip' className="action active-equip" onClick={() => inventoryAction("Equip")}>
                             Equip
                         </div>
-                        <div id='sell' className={actionBool ? "action" : "action active-sell"} onClick={() => inventoryAction("Sell")}>
+                        <div id='sell' className="action" onClick={() => inventoryAction("Sell")}>
                             Sell
                         </div>
                     </div>
